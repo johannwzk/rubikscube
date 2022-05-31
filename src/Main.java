@@ -3,12 +3,6 @@ import GLOOP.*;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    // w = 0
-    // y = 1
-    // r = 2
-    // o = 3
-    // g = 4
-    // b = 5
     private static final String axises = "wyrogb";
 
     // Wuerfel[x][y][z]
