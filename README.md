@@ -1,2 +1,2 @@
 # rubikscube
-Templouan
+A rubik's cube made with GLOOP
