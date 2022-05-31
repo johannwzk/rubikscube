@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="added setPosition methods in CubePosition">
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="added x,y,z getter in CubePosition, &#10;improved constructor in CubePart, &#10;added Constructor in Cube">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePosition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654024616949</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added x,y,z getter in CubePosition, &#10;improved constructor in CubePart, &#10;added Constructor in Cube">
+      <created>1654025798273</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1654025798273</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,6 +135,7 @@
     <MESSAGE value="changed cube size from 100 to 95, added first rotation (proof of concept)" />
     <MESSAGE value="Created classes for positioning, new Exception" />
     <MESSAGE value="added setPosition methods in CubePosition" />
-    <option name="LAST_COMMIT_MESSAGE" value="added setPosition methods in CubePosition" />
+    <MESSAGE value="added x,y,z getter in CubePosition, &#10;improved constructor in CubePart, &#10;added Constructor in Cube" />
+    <option name="LAST_COMMIT_MESSAGE" value="added x,y,z getter in CubePosition, &#10;improved constructor in CubePart, &#10;added Constructor in Cube" />
   </component>
 </project>
