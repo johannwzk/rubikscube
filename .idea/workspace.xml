@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Created classes for positioning, new Exception">
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="added setPosition methods in CubePosition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CubePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +34,7 @@
   </component>
   <component name="ProjectId" id="29w3gtl2ePdNHFMQ5Z2HrKrs2Cu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -100,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654022653448</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added setPosition methods in CubePosition">
+      <created>1654024616949</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1654024616949</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,6 +130,7 @@
     <MESSAGE value="updated workspace.xml" />
     <MESSAGE value="changed cube size from 100 to 95, added first rotation (proof of concept)" />
     <MESSAGE value="Created classes for positioning, new Exception" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created classes for positioning, new Exception" />
+    <MESSAGE value="added setPosition methods in CubePosition" />
+    <option name="LAST_COMMIT_MESSAGE" value="added setPosition methods in CubePosition" />
   </component>
 </project>

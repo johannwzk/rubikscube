@@ -3,29 +3,13 @@ import GLOOP.GLVektor;
 import GLOOP.GLWuerfel;
 
 public class CubePart extends GLWuerfel{
-    public CubePosition cubePosition;
+    public final CubePosition originalPosition;
+    public CubePosition currentPosition;
 
-    public CubePart(double pX, double pY, double pZ, double pSeitenlaenge, GLTextur pT) {
-        super(pX, pY, pZ, pSeitenlaenge, pT);
-    }
-
-    public CubePart(double pX, double pY, double pZ, double pSeitenlaenge, String pT) {
-        super(pX, pY, pZ, pSeitenlaenge, pT);
-    }
-
-    public CubePart(double pX, double pY, double pZ, double pSeitenlaenge) {
-        super(pX, pY, pZ, pSeitenlaenge);
-    }
-
-    public CubePart(GLVektor pPosition, double pSeitenlaenge) {
-        super(pPosition, pSeitenlaenge);
-    }
-
-    public CubePart(GLVektor pPosition, double pSeitenlaenge, GLTextur pT) {
-        super(pPosition, pSeitenlaenge, pT);
-    }
-
-    public CubePart(GLVektor pPosition, double pSeitenlaenge, String pT) {
-        super(pPosition, pSeitenlaenge, pT);
+    public CubePart(CubePosition cubePosition, double partSize, double spacing) {
+        //TODO: automated texture
+        super(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), partSize);
+        this.originalPosition = cubePosition;
+        this.currentPosition = cubePosition;
     }
 }

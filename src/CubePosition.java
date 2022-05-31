@@ -14,6 +14,10 @@ public class CubePosition {
         this.ro = ro;
     }
 
+    public int x() { return this.ro; }
+    public int y() { return this.wy; }
+    public int z() { return this.gb; }
+
     public void setPosition(int wy, int ro, int gb) {
         if (wy < -1 || wy > 1) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
         else if (ro < -1 || ro > 1) throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
