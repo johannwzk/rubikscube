@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="changed cube size from 100 to 95, added first rotation (proof of concept)">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ColorFactor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CubePosition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/exceptions/CorruptedCubePositionException.java" afterDir="false" />
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Created classes for positioning, new Exception">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CubePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePosition.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +42,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/planetbuilder/planetbuilder/coding/Installation GLOOP 3.7 (Linux)/lib",
+    "last_opened_file_path": "/home/planetbuilder/planetbuilder/coding/RubiksCube",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "Errors"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RunManager">
@@ -99,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654020012712</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Created classes for positioning, new Exception">
+      <created>1654022653448</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1654022653448</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,6 +118,7 @@
     <MESSAGE value="updated gitignore" />
     <MESSAGE value="updated workspace.xml" />
     <MESSAGE value="changed cube size from 100 to 95, added first rotation (proof of concept)" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed cube size from 100 to 95, added first rotation (proof of concept)" />
+    <MESSAGE value="Created classes for positioning, new Exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created classes for positioning, new Exception" />
   </component>
 </project>
