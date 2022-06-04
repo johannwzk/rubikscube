@@ -7,8 +7,8 @@ public class CubePosition {
     public static final CubePosition YELLOW_CENTER = new CubePosition(ColorPosition.YELLOW, ColorPosition.NONE, ColorPosition.NONE);
     public static final CubePosition RED_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.RED, ColorPosition.NONE);
     public static final CubePosition ORANGE_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.ORANGE, ColorPosition.NONE);
-    public static final CubePosition GREEN_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.NONE, ColorPosition.GREEN);
     public static final CubePosition BLUE_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.NONE, ColorPosition.BLUE);
+    public static final CubePosition GREEN_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.NONE, ColorPosition.GREEN);
 
 
     private int wy; // 1=w, -1=y, 0=nc
@@ -18,7 +18,7 @@ public class CubePosition {
     public CubePosition(int wy, int ro, int gb) {
         if (wy < ColorPosition.WHITE || wy > ColorPosition.YELLOW) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
         else if (ro < ColorPosition.ORANGE || ro > ColorPosition.RED) throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
-        else if (gb < ColorPosition.BLUE || gb > ColorPosition.GREEN) throw new CorruptedCubePositionException("Cube position 'gb' corrupted: " + gb + " (should be either -1, 0 or 1)");
+        else if (gb < ColorPosition.GREEN || gb > ColorPosition.BLUE) throw new CorruptedCubePositionException("Cube position 'gb' corrupted: " + gb + " (should be either -1, 0 or 1)");
         this.wy = wy;
         this.gb = gb;
         this.ro = ro;
@@ -47,7 +47,7 @@ public class CubePosition {
     public void setPosition(int wy, int ro, int gb) {
         if (wy < ColorPosition.WHITE || wy > ColorPosition.YELLOW) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
         else if (ro < ColorPosition.ORANGE || ro > ColorPosition.RED) throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
-        else if (gb < ColorPosition.BLUE || gb > ColorPosition.GREEN) throw new CorruptedCubePositionException("Cube position 'gb' corrupted: " + gb + " (should be either -1, 0 or 1)");
+        else if (gb < ColorPosition.GREEN || gb > ColorPosition.BLUE) throw new CorruptedCubePositionException("Cube position 'gb' corrupted: " + gb + " (should be either -1, 0 or 1)");
         this.wy = wy;
         this.gb = gb;
         this.ro = ro;
@@ -55,15 +55,15 @@ public class CubePosition {
 
     public void setPosition(int position) {
         if (position % ColorFactor.WHITE == 0 && (position & ColorFactor.YELLOW) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
-        if (position % ColorFactor.RED == 0 && (position & ColorFactor.ORANGE) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
-        if (position % ColorFactor.GREEN == 0 && (position & ColorFactor.BLUE) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
+        if (position % ColorFactor.ORANGE == 0 && (position & ColorFactor.RED) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
+        if (position % ColorFactor.BLUE == 0 && (position & ColorFactor.GREEN) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
 
         if (position % ColorFactor.WHITE == 0) this.wy = ColorPosition.WHITE;
-        else if (position % ColorFactor.YELLOW == 0) this.wy = ColorPosition.BLUE;
-        if (position % ColorFactor.RED == 0) this.ro = ColorPosition.RED;
-        else if (position % ColorFactor.ORANGE == 0) this.ro = ColorPosition.BLUE;
-        if (position % ColorFactor.GREEN == 0) this.gb = ColorPosition.GREEN;
-        else if (position % ColorFactor.BLUE == 0) this.gb = ColorPosition.BLUE;
+        else if (position % ColorFactor.YELLOW == 0) this.wy = ColorPosition.GREEN;
+        if (position % ColorFactor.ORANGE == 0) this.ro = ColorPosition.RED;
+        else if (position % ColorFactor.RED == 0) this.ro = ColorPosition.GREEN;
+        if (position % ColorFactor.BLUE == 0) this.gb = ColorPosition.BLUE;
+        else if (position % ColorFactor.GREEN == 0) this.gb = ColorPosition.GREEN;
     }
 
     public int toInt() {
@@ -76,13 +76,13 @@ public class CubePosition {
         else if (this.wy == ColorPosition.NONE) wyFactor = ColorFactor.NONE;
         else throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
 
-        if (this.ro == ColorPosition.RED) roFactor = ColorFactor.RED;
-        else if (this.ro == ColorPosition.ORANGE) roFactor = ColorFactor.ORANGE;
+        if (this.ro == ColorPosition.RED) roFactor = ColorFactor.ORANGE;
+        else if (this.ro == ColorPosition.ORANGE) roFactor = ColorFactor.RED;
         else if (this.ro == ColorPosition.NONE) roFactor = ColorFactor.NONE;
         else throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
 
-        if (this.gb == ColorPosition.GREEN) gbFactor = ColorFactor.GREEN;
-        else if (this.gb == ColorPosition.BLUE) gbFactor = ColorFactor.BLUE;
+        if (this.gb == ColorPosition.BLUE) gbFactor = ColorFactor.BLUE;
+        else if (this.gb == ColorPosition.GREEN) gbFactor = ColorFactor.GREEN;
         else if (this.gb == ColorPosition.NONE) gbFactor = ColorFactor.NONE;
         else throw new CorruptedCubePositionException("Cube position 'gb' corrupted: " + gb + " (should be either -1, 0 or 1)");
 

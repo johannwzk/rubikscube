@@ -8,7 +8,7 @@ public class CubePart {
     public CubePosition currentPosition;
 
 
-    private final GLQuader[] cubeSides;
+    public final GLQuader[] cubeSides;
 
     private final GLWuerfel middle;
 
