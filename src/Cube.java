@@ -7,9 +7,9 @@ public class Cube {
 
     public Cube(double size, double spacing) {
         int i = 0;
-        for (int wy = -ColorPosition.WHITE; wy <= ColorPosition.YELLOW; wy++) {
-            for (int ro = -ColorPosition.ORANGE; ro <= ColorPosition.RED; ro++) {
-                for (int gb = -ColorPosition.BLUE; gb <= ColorPosition.GREEN; gb++) {
+        for (int wy = ColorPosition.WHITE; wy <= ColorPosition.YELLOW; wy++) {
+            for (int ro = ColorPosition.ORANGE; ro <= ColorPosition.RED; ro++) {
+                for (int gb = ColorPosition.BLUE; gb <= ColorPosition.GREEN; gb++) {
                     cubeParts[i] = new CubePart(new CubePosition(wy, ro, gb), (size - 2*spacing)/3, spacing);
                     i++;
                 }
