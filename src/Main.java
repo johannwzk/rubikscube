@@ -1,4 +1,5 @@
-import GLOOP.*;
+import GLOOP.GLKamera;
+import GLOOP.GLLicht;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,14 +18,15 @@ public class Main {
             light2.rotiere(0.3, 0, 1, 0, 0 , 0, 0);
             if (i % 370 == 0) {
                 if (i == 1) return;
-                cube.rotateRed(1);
-                cube.rotateOrange(1);
-                cube.rotateWhite(1);
-                cube.rotateYellow(1);
-                cube.rotateGreen(1);
+                cube.rotate(Color.RED, 1);
+                cube.rotate(Color.ORANGE, 1);
+                cube.rotate(Color.WHITE, 1);
+                cube.rotate(Color.YELLOW, 1);
+                cube.rotate(Color.GREEN, 1);
+                cube.rotate(Color.BLUE, 1);
             }
             try { TimeUnit.MILLISECONDS.sleep(16); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
     }
-}//Temp
+}
