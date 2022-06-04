@@ -1,6 +1,16 @@
 import exceptions.CorruptedCubePositionException;
 
+import java.util.Objects;
+
 public class CubePosition {
+    public static final CubePosition WHITE_CENTER = new CubePosition(ColorPosition.WHITE, ColorPosition.NONE, ColorPosition.NONE);
+    public static final CubePosition YELLOW_CENTER = new CubePosition(ColorPosition.YELLOW, ColorPosition.NONE, ColorPosition.NONE);
+    public static final CubePosition RED_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.RED, ColorPosition.NONE);
+    public static final CubePosition ORANGE_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.ORANGE, ColorPosition.NONE);
+    public static final CubePosition GREEN_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.NONE, ColorPosition.GREEN);
+    public static final CubePosition BLUE_CENTER = new CubePosition(ColorPosition.NONE, ColorPosition.NONE, ColorPosition.BLUE);
+
+
     private int wy; // 1=w, -1=y, 0=nc
     private int ro; // 1=r, -1=o, 0=n
     private int gb; // 1=g, -1=b, 0=n
@@ -20,6 +30,19 @@ public class CubePosition {
     public int wy() { return this.wy; }
     public int z() { return this.gb; }
     public int gb() { return this.gb; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CubePosition that = (CubePosition) o;
+        return wy == that.wy && ro == that.ro && gb == that.gb;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(wy, ro, gb);
+    }
 
     public void setPosition(int wy, int ro, int gb) {
         if (wy < ColorPosition.WHITE || wy > ColorPosition.YELLOW) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");

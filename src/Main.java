@@ -4,17 +4,23 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        GLKamera camera = new GLKamera(1280, 720); camera.setzePosition(0, 200, 500);
+        GLKamera camera = new GLKamera(1920, 1080); camera.setzePosition(0, 200, 500);
         GLLicht light = new GLLicht(5000, 10000, 2500);
         Cube cube = new Cube(200, 4);
 
+        int i = 0;
         while (true){
-//            camera.rotiere(0.01, 0, 1, 0, 0, 0, 0);
-//            light.rotiere(0.01, 0, 1, 0, 0 , 0, 0);
-
-            cube.rotateWhite(1);
-
-            try { TimeUnit.SECONDS.sleep(5); }
+            ++i;
+            camera.rotiere(0.3, 0, 1, 0, 0, 0, 0);
+            light.rotiere(0.3, 0, 1, 0, 0 , 0, 0);
+            if (i % 370 == 0) {
+                if (i == 1) return;
+                cube.rotateRed(1);
+                cube.rotateOrange(1);
+                cube.rotateWhite(1);
+                cube.rotateYellow(1);
+            }
+            try { TimeUnit.MILLISECONDS.sleep(16); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
     }
