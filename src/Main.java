@@ -1,6 +1,7 @@
 import GLOOP.GLKamera;
 import GLOOP.GLLicht;
 
+import javax.crypto.Cipher;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
@@ -19,11 +20,12 @@ public class Main {
             if (i % 370 == 0) {
                 if (i == 1) return;
                 cube.rotate(Colour.RED, 1);
-                cube.rotate(Colour.ORANGE, 1);
+//                cube.rotate(Colour.ORANGE, 1);
                 cube.rotate(Colour.WHITE, 1);
-                cube.rotate(Colour.YELLOW, 1);
-                cube.rotate(Colour.GREEN, 1);
-                cube.rotate(Colour.BLUE, 1);
+//                cube.rotate(Colour.YELLOW, 1);
+//                cube.rotate(Colour.GREEN, 1);
+//                cube.rotate(Colour.BLUE, 1);
+                System.out.println("Position: " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).x() + ", " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).y() + ", " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).z());
             }
             try { TimeUnit.MILLISECONDS.sleep(16); }
             catch (InterruptedException e) { throw new RuntimeException(e); }

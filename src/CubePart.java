@@ -12,6 +12,8 @@ public class CubePart {
     public final GLVektor originalVectorPosition;
     public GLVektor currentVectorPosition;
 
+    public CubePartPosition[] sidePositions = {CubePartPosition.RED_CENTER, CubePartPosition.ORANGE_CENTER, CubePartPosition.WHITE_CENTER, CubePartPosition.YELLOW_CENTER, CubePartPosition.GREEN_CENTER, CubePartPosition.BLUE_CENTER};
+
     public CubePart(CubePartPosition cubePosition, double partSize, double spacing) {
         middle = new GLWuerfel(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), 0);
 
@@ -29,6 +31,7 @@ public class CubePart {
 
         this.originalVectorPosition = middle.gibPosition();
         this.currentVectorPosition = originalVectorPosition;
+
     }
 
     public void rotate(double pWinkel, GLVektor pRichtung, GLVektor pOrt) {
@@ -38,5 +41,15 @@ public class CubePart {
         currentVectorPosition.x = middle.gibX();
         currentVectorPosition.y = middle.gibY();
         currentVectorPosition.z = middle.gibZ();
+    }
+
+    public CubePartPosition getSidePosition(int colourFactor) {
+        if (colourFactor % ColourFactor.RED == 0) return sidePositions[0];
+        else if (colourFactor % ColourFactor.ORANGE == 0) return sidePositions[1];
+        else if (colourFactor % ColourFactor.WHITE == 0) return sidePositions[2];
+        else if (colourFactor % ColourFactor.YELLOW == 0) return sidePositions[3];
+        else if (colourFactor % ColourFactor.GREEN == 0) return sidePositions[4];
+        else if (colourFactor % ColourFactor.BLUE == 0) return sidePositions[5];
+        else throw new IllegalArgumentException("colourFactor must be a valid colourFactor (2, 3, 5, 7, 11, 13)");
     }
 }
