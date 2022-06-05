@@ -19,12 +19,17 @@ public class Main {
             light2.rotiere(0.3, 0, 1, 0, 0 , 0, 0);
             if (i % 370 == 0) {
                 if (i == 1) return;
+
+                // rotation modifier = Richtung
                 cube.rotate(Colour.RED, 1);
-//                cube.rotate(Colour.ORANGE, 1);
-                cube.rotate(Colour.WHITE, 1);
-//                cube.rotate(Colour.YELLOW, 1);
-//                cube.rotate(Colour.GREEN, 1);
-//                cube.rotate(Colour.BLUE, 1);
+
+                // gibt Seitenposition, man braucht den Index des kleinen Würfels (mit getCubePartIndex) und die Seite deren Orientation man haben will
+                // geht auch für "schwarze" Seiten, aber das ist eigentlich egal
+                cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE);
+
+
+
+
                 System.out.println("Position: " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).x() + ", " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).y() + ", " + cube.getSidePosition(cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.BLUE)), Colour.WHITE).z());
             }
             try { TimeUnit.MILLISECONDS.sleep(16); }
