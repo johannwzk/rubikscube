@@ -1,4 +1,4 @@
-public final class ColorFactor {
+public final class ColourFactor {
     public static final int NONE   = 1;
     public static final int RED     = 2;
     public static final int ORANGE  = 3;

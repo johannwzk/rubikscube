@@ -1,4 +1,4 @@
-public class ColorPosition {
+public class ColourPosition {
     public static final int NONE   = 0;
     public static final int RED     = -1; //x
     public static final int ORANGE  = 1; //x

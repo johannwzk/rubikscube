@@ -6,13 +6,13 @@ public class CubePart {
     public final GLQuader[] cubeSides;
     private final GLWuerfel middle;
 
-    public final CubePosition originalPosition;
-    public CubePosition currentPosition;
+    public final CubePartPosition originalPosition;
+    public CubePartPosition currentPosition;
 
     public final GLVektor originalVectorPosition;
     public GLVektor currentVectorPosition;
 
-    public CubePart(CubePosition cubePosition, double partSize, double spacing) {
+    public CubePart(CubePartPosition cubePosition, double partSize, double spacing) {
         middle = new GLWuerfel(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), 0);
 
         cubeSides = new GLQuader[6];
