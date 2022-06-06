@@ -135,4 +135,10 @@ public class Cube{
     public void solve(){
 
     }
+
+    public void delete() {
+        for (CubePart cubePart : cubeParts) {
+            cubePart.delete();
+        }
+    }
 }
