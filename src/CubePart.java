@@ -1,19 +1,24 @@
 import GLOOP.*;
 
 public class CubePart {
+    // sides of the small cube. The cube is not just one big cube because GLOOP does not allow giving each side a specific texture
     public final GLQuader[] cubeSides;
+    // middle position of the small cube
     public final GLKugel middle;
 
+    // original "logical" position of the small cube, not needed yet, but maybe in an update
     public final CubePartPosition originalPosition;
+    // current "logical" position of the small cube. Used to detect cubes to be rotated and for the solving algorithm
     public CubePartPosition currentPosition;
 
+    // original position of the small cube, used for center cubes to rotate around them
     public final GLVektor originalVectorPosition;
     public GLVektor currentVectorPosition;
 
     public CubePartPosition[] sidePositions = {CubePartPosition.RED_CENTER, CubePartPosition.ORANGE_CENTER, CubePartPosition.WHITE_CENTER, CubePartPosition.YELLOW_CENTER, CubePartPosition.GREEN_CENTER, CubePartPosition.BLUE_CENTER};
 
-    public CubePart(CubePartPosition cubePosition, double partSize, double spacing, boolean ball) {
-        if (!ball) {
+    public CubePart(CubePartPosition cubePosition, double partSize, double spacing, boolean sphere) {
+        if (!sphere) {
             middle = new GLKugel(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0);
             cubeSides = new GLQuader[6];
             cubeSides[0] = new GLQuader(cubePosition.x() * (partSize + spacing) - partSize / 2, cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0, partSize, partSize);
