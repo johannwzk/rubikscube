@@ -97,4 +97,23 @@ public class Cube {
     public CubePartPosition getSidePosition(int cubePartIndex, Colour colour) {
         return cubeParts[cubePartIndex].getSidePosition(colour.colourFactor);
     }
+    //TODO Method that checks if cube is solved
+    public boolean isSolved(){
+        return false;
+    }
+    //TODO Method that shuffles the cube
+    public void shuffle(){
+
+    }
+
+    //TODO Bogosolve method
+    public void bogosolve(){
+
+    }
+
+    //TODO Quicksolve method
+
+    public void solve(){
+
+    }
 }

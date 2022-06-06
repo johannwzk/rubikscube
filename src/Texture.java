@@ -11,4 +11,5 @@ public class Texture {
     public static final GLTextur SHIFT = new GLTextur("textures/shift.png");
     public static final GLTextur SKY_BLUE = new GLTextur("textures/skyblue.png");
     public static final GLTextur LOGO = new GLTextur("textures/logo.png");
+    public static final GLTextur UI = new GLTextur("textures/ui.png");
 }
