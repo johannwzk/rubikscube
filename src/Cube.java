@@ -10,13 +10,14 @@ import java.util.stream.Collectors;
 public class Cube{
     // length of the rotation animation
     public static final double ROTATION_ANIMATION_LENGTH = 20; //ms
+    public static final int BOGO_SORT_EFFICIENCY = 69;
 
     // array of all the small cubes the cube contains
     private final CubePart[] cubeParts = new CubePart[27];
 
     //for rotating a random colour
-    private Random r = new Random();
-    private Colour[] lsdArray = {Colour.YELLOW, Colour.WHITE, Colour.RED, Colour.ORANGE, Colour.GREEN, Colour.BLUE};
+    private final Random r = new Random();
+    private final Colour[] lsdArray = {Colour.RED, Colour.ORANGE, Colour.WHITE, Colour.YELLOW, Colour.GREEN, Colour.BLUE};
 
     public Cube(double size, double spacing) {
         // index to put each cubePart in the cubeParts array despite using 3 for-loops
@@ -125,12 +126,12 @@ public class Cube{
     public boolean isSolved(){
         return false;
     }
-    public void shuffle() {
-        for (int i = 0; i < 150; i++) this.rotate(lsdArray[r.nextInt(6)], 1);
+    public void shuffle(int rotations) {
+        for (int i = 0; i < rotations; i++) this.rotate(lsdArray[r.nextInt(6)], 1);
     }
 
     public void bogoSolve(){
-        while (!isSolved()) shuffle();
+        while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY);
     }
 
     //TODO Quicksolve method

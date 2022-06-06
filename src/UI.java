@@ -3,6 +3,7 @@ import GLOOP.*;
 public class UI {
     public static final double SHIFT_LOCK_TIME = 250; // ms
     public static final double CAMERA_ROTATION_SPEED = 60; // degree/s
+    public static final int DEFAULT_SHUFFLE_ROTATIONS = 150;
 
     // ENVIRONMENT
 
@@ -119,7 +120,7 @@ public class UI {
         else if (keyboard.istGedrueckt('b'))rotateCube(Colour.BLUE, rotationModifier);
         else if (keyboard.esc())System.exit(0);
         else if (keyboard.backspace()) reset();
-        else if (keyboard.istGedrueckt('s'))cube.shuffle();
+        else if (keyboard.istGedrueckt('s'))cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS);
         else if (keyboard.istGedrueckt('l')) cube.bogoSolve();
         else if (keyboard.istGedrueckt('h')) cube.solve();
 
@@ -139,7 +140,7 @@ public class UI {
             else if (button == 7)rotateCube(Colour.BLUE, rotationModifier);
             else if (button == 1)System.exit(0);
             else if (button == 0) reset();
-            else if (button == 12)cube.shuffle();
+            else if (button == 12)cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS);
             else if (button == 14) cube.bogoSolve();
             else if (button == 13) cube.solve();
         }
