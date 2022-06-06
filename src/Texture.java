@@ -1,5 +1,6 @@
 import GLOOP.GLTextur;
 
+// defines and initializes the textures
 public class Texture {
     public static final GLTextur RED = new GLTextur("textures/red.png");
     public static final GLTextur ORANGE = new GLTextur("textures/orange.png");

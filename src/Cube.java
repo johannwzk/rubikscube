@@ -23,7 +23,7 @@ public class Cube{
                 for (int gb = ColourPosition.GREEN; gb <= ColourPosition.BLUE; gb++) {
                     // spawn new cube at given position with part size of [cube size minus the two gaps, all divided by three]
                     cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), (size - 2*spacing)/3, spacing, false);
-                    // if cubePart is center of the cube, create a Sphere
+                    // if cubePart is center of the cube, create a Sphere with size of the cube without spacing
                     if (ro == 0 && wy == 0 && gb == 0) {
                         cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), /*2.1*((size - 2*spacing)/3)*/size*0.5, spacing, true);
                         cubeParts[cubePartsIndex].middle.setzeTextur(Texture.BLACK);
