@@ -1,5 +1,4 @@
 import GLOOP.GLVektor;
-import GLOOP.Sys;
 import java.util.Random;
 
 import java.util.Arrays;
@@ -9,7 +8,8 @@ import java.util.stream.Collectors;
 
 public class Cube{
     // length of the rotation animation
-    public static final double ROTATION_ANIMATION_LENGTH = 20; //ms
+    public static final double DEFAULT_ROTATION_ANIMATION_LENGTH = 200000000; //ns
+    public static final double SHUFFLE_ROTATION_ANIMATION_START_LENGTH = 500000000; //ns
     public static final int BOGO_SORT_EFFICIENCY = 69;
 
     // array of all the small cubes the cube contains
@@ -66,8 +66,9 @@ public class Cube{
         return -1;
     }
 
-    //rotate colour side with direction modifier
-    public void rotate(Colour colour, int rotationModifier) {
+    //rotate colour side with direction modifier and specific rotation animation speed in ms
+    public void rotate(Colour colour, int rotationModifier, double animationSpeed) {
+        if (rotationModifier == 0) throw new IllegalArgumentException("rotationModifier must not be 0");
         // get center position of the side to rotate around it
         GLVektor sideCenter = Arrays.stream(cubeParts).filter(cubePart1 -> cubePart1.currentPosition.equals(colour.centerPosition)).collect(Collectors.toList()).get(0).originalVectorPosition;
 
@@ -78,7 +79,7 @@ public class Cube{
             for (CubePart cubePart : toBeRotated)
                 cubePart.rotate(1, new GLVektor(-colour.centerPosition.toVector().x * rotationModifier, -colour.centerPosition.toVector().y * rotationModifier, -colour.centerPosition.toVector().z * rotationModifier), sideCenter);
             // wait ROTATION_ANIMATION_LENGTH/90 90 times -> animation length ~= ROTATION_ANIMATION_LENGTH
-            try { TimeUnit.NANOSECONDS.sleep((long)(ROTATION_ANIMATION_LENGTH/90*1000)); }
+            try { TimeUnit.NANOSECONDS.sleep((long)(animationSpeed/90)); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
 
@@ -118,16 +119,41 @@ public class Cube{
         }
     }
 
+    // rotation with default animation speed
+    public void rotate(Colour colour, int rotationModifier) {
+        this.rotate(colour, rotationModifier, DEFAULT_ROTATION_ANIMATION_LENGTH);
+    }
+
     // get the side position of a colour on a small cube in cubeParts
     public CubePartPosition getSidePosition(CubePartPosition cubePartPosition, Colour colour) {
         return cubeParts[getCubePartIndex(cubePartPosition)].getSidePosition(colour.colourFactor);
     }
-    //TODO Method that checks if cube is solved
+    // Method that checks if cube is solved
     public boolean isSolved(){
-        return false;
+        // go through every cube Part
+        for (CubePart cubePart : cubeParts) {
+            // if it is a center part, orientation does not matter
+            if (cubePart.currentPosition.isCenterPosition()) continue;
+            // gp through every side and check if position is right
+            for (int i = 0; i < cubePart.sidePositions.length; i++)
+                if (!cubePart.sidePositions[i].equals(CubePartPosition.CENTER_POSITIONS[i])) return false;
+        }
+        return true;
     }
+
+    // shuffle cube with random rotations (count is specified with parameter)
     public void shuffle(int rotations) {
-        for (int i = 0; i < rotations; i++) this.rotate(lsdArray[r.nextInt(6)], 1);
+        double rotationSpeed = SHUFFLE_ROTATION_ANIMATION_START_LENGTH;
+        for (int i = 0; i < rotations; i++) {
+            // generate number 0-1
+            int random = r.nextInt(2);
+            // rotation modifier has to be 1 or -1, so if random == 0, set it to -2
+            if (random == 0) random = -1;
+            // rotate a random side
+            this.rotate(lsdArray[r.nextInt(6)], random, rotationSpeed);
+            // speed up rotation over time
+            rotationSpeed *= 0.95;
+        }
     }
 
     public void bogoSolve(){

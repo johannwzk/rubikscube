@@ -3,7 +3,7 @@ import GLOOP.*;
 public class UI {
     public static final double SHIFT_LOCK_TIME = 250; // ms
     public static final double CAMERA_ROTATION_SPEED = 60; // degree/s
-    public static final int DEFAULT_SHUFFLE_ROTATIONS = 150;
+    public static final int DEFAULT_SHUFFLE_ROTATIONS = 400;
 
     // ENVIRONMENT
 
@@ -50,7 +50,7 @@ public class UI {
 
         // shift marker
         shiftMarker = new GLTafel(-465, 270, 0, 90, 30);
-        shiftMarker.setzeTextur(Texture.BLACK);
+        shiftMarker.setzeTextur(Texture.SKY_BLUE);
         shiftMarker.setzeKamerafixierung(true);
         shiftMarker.setzeAutodrehung(true);
 
@@ -100,7 +100,7 @@ public class UI {
         if (keyboard.shift() && !shiftLock) {
             rotationModifier = rotationModifier*(-1);
             shiftLock = true;
-            if (rotationModifier == 1) shiftMarker.setzeTextur(Texture.BLACK);
+            if (rotationModifier == 1) shiftMarker.setzeTextur(Texture.SKY_BLUE);
             else if (rotationModifier == -1) shiftMarker.setzeTextur(Texture.SHIFT);
             shiftTimeoutPassed = 0;
         }
@@ -124,10 +124,9 @@ public class UI {
         else if (keyboard.istGedrueckt('l')) cube.bogoSolve();
         else if (keyboard.istGedrueckt('h')) cube.solve();
 
+        // do action if some button is pressed
         if(mouse.gedruecktLinks()){
-            System.out.println("X: " + mouse.gibX() + " Y: " + mouse.gibY());
             int button = buttonPressed(positions, mouse.gibX(), mouse.gibY());
-            System.out.println(button);
             if (button == 8) camera.rotiere(1, -1, 0, 0, 0, 0, 0);
             else if (button == 10) camera.rotiere(1, 1, 0, 0, 0, 0, 0);
             else if (button == 11) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
@@ -144,14 +143,17 @@ public class UI {
             else if (button == 14) cube.bogoSolve();
             else if (button == 13) cube.solve();
         }
-        if(cube.isSolved())victory();
+
+        // if cube is solved, do victory animation
+        if(cube.isSolved()) victory();
     }
 
+    // rotate cube side, reset rotation Modifier, shiftLock and shiftMarker
     public void rotateCube(Colour colour, int modifier){
         cube.rotate(colour, modifier);
         rotationModifier = 1;
         shiftLock = false;
-        shiftMarker.setzeTextur(Texture.BLACK);
+        shiftMarker.setzeTextur(Texture.SKY_BLUE);
     }
 
     // reset cube

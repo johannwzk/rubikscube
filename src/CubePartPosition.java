@@ -11,15 +11,16 @@ public class CubePartPosition {
     public static final CubePartPosition YELLOW_CENTER = new CubePartPosition(ColourPosition.NONE, ColourPosition.YELLOW, ColourPosition.NONE);
     public static final CubePartPosition GREEN_CENTER = new CubePartPosition(ColourPosition.NONE, ColourPosition.NONE, ColourPosition.GREEN);
     public static final CubePartPosition BLUE_CENTER = new CubePartPosition(ColourPosition.NONE, ColourPosition.NONE, ColourPosition.BLUE);
+    public static final CubePartPosition[] CENTER_POSITIONS = {RED_CENTER, ORANGE_CENTER, WHITE_CENTER, YELLOW_CENTER, GREEN_CENTER, BLUE_CENTER};
     public static final CubePartPosition RO_AXIS = ORANGE_CENTER;
     public static final CubePartPosition WY_AXIS = YELLOW_CENTER;
     public static final CubePartPosition GB_AXIS = BLUE_CENTER;
 
 
-    // position on wy (= white/yellow) -axis
-    private int wy;
     // position on ro (= red/orange) -axis
     private int ro;
+    // position on wy (= white/yellow) -axis
+    private int wy;
     // position on gb (= green/blue) -axis
     private int gb;
 
@@ -100,6 +101,14 @@ public class CubePartPosition {
     // convert CubePosition to GLVektor
     public GLVektor toVector() {
         return new GLVektor(this.x(), this.y(), this.z());
+    }
+
+    public boolean isCenterPosition() {
+        int zeroes = 0;
+        if (this.ro == 0) zeroes++;
+        if (this.wy == 0) zeroes++;
+        if (this.gb == 0) zeroes++;
+        return zeroes >= 2;
     }
 
 }
