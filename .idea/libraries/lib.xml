@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../Installation GLOOP 3.7 (Linux)/lib" />
+      <root url="file://$USER_HOME$/Downloads/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../Installation GLOOP 3.7 (Linux)/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/lib" recursive="false" />
   </library>
 </component>
