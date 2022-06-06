@@ -43,7 +43,7 @@ public class UI {
 
         // UI
         ui = new GLTafel(408, -0, 0,200, 500 );
-        ui.setzeTextur(Texture.BLACK);
+        ui.setzeTextur(Texture.UI);
         ui.setzeKamerafixierung(true);
         ui.setzeAutodrehung(true);
 
