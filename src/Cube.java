@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Cube{
     // length of the rotation animation
-    public static final int ROTATION_ANIMATION_LENGTH = 450; //ms
+    public static final double ROTATION_ANIMATION_LENGTH = 20; //ms
 
     // array of all the small cubes the cube contains
     private final CubePart[] cubeParts = new CubePart[27];
@@ -72,7 +72,7 @@ public class Cube{
             for (CubePart cubePart : toBeRotated)
                 cubePart.rotate(1, new GLVektor(-colour.centerPosition.toVector().x * rotationModifier, -colour.centerPosition.toVector().y * rotationModifier, -colour.centerPosition.toVector().z * rotationModifier), sideCenter);
             // wait ROTATION_ANIMATION_LENGTH/90 90 times -> animation length ~= ROTATION_ANIMATION_LENGTH
-            try { TimeUnit.MILLISECONDS.sleep(ROTATION_ANIMATION_LENGTH/90); }
+            try { TimeUnit.NANOSECONDS.sleep((long)(ROTATION_ANIMATION_LENGTH/90*1000)); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
 
