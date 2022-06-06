@@ -1,4 +1,6 @@
 import GLOOP.GLVektor;
+import GLOOP.Sys;
+import java.util.Random;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,10 @@ public class Cube{
 
     // array of all the small cubes the cube contains
     private final CubePart[] cubeParts = new CubePart[27];
+
+    //for rotating a random colour
+    private Random r = new Random();
+    private Colour[] lsdArray = {Colour.YELLOW, Colour.WHITE, Colour.RED, Colour.ORANGE, Colour.GREEN, Colour.BLUE};
 
     public Cube(double size, double spacing) {
         // index to put each cubePart in the cubeParts array despite using 3 for-loops
@@ -119,9 +125,8 @@ public class Cube{
     public boolean isSolved(){
         return false;
     }
-    //TODO Method that shuffles the cube
-    public void shuffle(){
-
+    public void shuffle() {
+        for (int i = 0; i < 150; i++) this.rotate(lsdArray[r.nextInt(6)], 1);
     }
 
     public void bogoSolve(){
