@@ -1,3 +1,4 @@
+// unique prime factor of each colour easy recognition of appearance of the color in a cube part position
 public final class ColourFactor {
     public static final int NONE   = 1;
     public static final int RED     = 2;

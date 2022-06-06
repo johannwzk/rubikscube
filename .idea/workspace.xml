@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="New UI class. Moved light and camera to UI. Instead of camera.rotiere() and light.rotiere() use ui.rotate(). It takes the same parameters.">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/planetbuilder.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Texture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/textures/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Finished documentation (for now)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RubiksCube.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RubiksCube.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/sok.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/planetbuilder/planetbuilder/coding/Installation GLOOP 3.7 (Linux)/lib",
+    "last_opened_file_path": "/home/planetbuilder/planetbuilder/coding/RubiksCube/.idea/libraries/GLOOP 3.7 (Linux)/lib",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -132,7 +122,28 @@
       <option name="project" value="LOCAL" />
       <updated>1654514632385</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added GLOOP library into project,&#10;added texture constants,&#10;added cube logo,&#10;added window and controls and moved them from Main to UI,">
+      <created>1654518262362</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1654518262362</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed rotation in the wrong direction bug, started adding comments for documentation">
+      <created>1654522939055</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1654522939055</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Finished documentation (for now)">
+      <created>1654526290260</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1654526290260</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,9 +165,12 @@
     <MESSAGE value="added setPosition methods in CubePosition" />
     <MESSAGE value="added x,y,z getter in CubePosition, &#10;improved constructor in CubePart, &#10;added Constructor in Cube" />
     <MESSAGE value="New UI class. Moved light and camera to UI. Instead of camera.rotiere() and light.rotiere() use ui.rotate(). It takes the same parameters." />
-    <option name="LAST_COMMIT_MESSAGE" value="New UI class. Moved light and camera to UI. Instead of camera.rotiere() and light.rotiere() use ui.rotate(). It takes the same parameters." />
+    <MESSAGE value="Added GLOOP library into project,&#10;added texture constants,&#10;added cube logo,&#10;added window and controls and moved them from Main to UI," />
+    <MESSAGE value="Fixed rotation in the wrong direction bug, started adding comments for documentation" />
+    <MESSAGE value="Finished documentation (for now)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished documentation (for now)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/RubiksCube$Main.ic" NAME="Main Coverage Results" MODIFIED="1654512756898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/RubiksCube$Main.ic" NAME="Main Coverage Results" MODIFIED="1654526858630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

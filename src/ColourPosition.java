@@ -1,3 +1,4 @@
+// position on colour axis (1 or -1)
 public class ColourPosition {
     public static final int NONE   = 0;
     public static final int RED     = -1; //x

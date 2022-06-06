@@ -16,10 +16,13 @@ public class CubePartPosition {
     public static final CubePartPosition GB_AXIS = BLUE_CENTER;
 
 
-
+    // position on wy (= white/yellow) -axis
     private int wy;
+    // position on ro (= red/orange) -axis
     private int ro;
+    // position on gb (= green/blue) -axis
     private int gb;
+
     public CubePartPosition(int ro, int wy, int gb) {
         if (ro < ColourPosition.RED || ro > ColourPosition.ORANGE) throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
         else if (wy < ColourPosition.WHITE || wy > ColourPosition.YELLOW) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
@@ -29,6 +32,7 @@ public class CubePartPosition {
         this.ro = ro;
     }
 
+    // just getter, for better readability of the code in logical (ro, wy, gb) and coordinate (x, y, z) form
     public int x() { return this.ro; }
     public int ro() { return this.ro; }
     public int y() { return this.wy; }
@@ -36,6 +40,7 @@ public class CubePartPosition {
     public int z() { return this.gb; }
     public int gb() { return this.gb; }
 
+    // returns if the object o equals "this"
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,11 +49,7 @@ public class CubePartPosition {
         return wy == that.wy && ro == that.ro && gb == that.gb;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(wy, ro, gb);
-    }
-
+    // set a whole new position
     public void setPosition(int ro, int wy, int gb) {
         if (ro < ColourPosition.RED || ro > ColourPosition.ORANGE) throw new CorruptedCubePositionException("Cube position 'ro' corrupted: " + ro + " (should be either -1, 0 or 1)");
         else if (wy < ColourPosition.WHITE || wy > ColourPosition.YELLOW) throw new CorruptedCubePositionException("Cube position 'wy' corrupted: " + wy + " (should be either -1, 0 or 1)");
@@ -58,6 +59,7 @@ public class CubePartPosition {
         this.ro = ro;
     }
 
+    // set a whole new position with encoded position as input
     public void setPosition(int position) {
         if (position % ColourFactor.RED == 0 && (position & ColourFactor.ORANGE) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
         if (position % ColourFactor.WHITE == 0 && (position & ColourFactor.YELLOW) == 0) throw new IllegalArgumentException("Position cannot contain factors for white and yellow");
@@ -71,6 +73,7 @@ public class CubePartPosition {
         else if (position % ColourFactor.BLUE == 0) this.gb = ColourPosition.BLUE;
     }
 
+    // encode position to product of prime numbers, each of the primes 1-6 stands for one colour (see ColourFactor)
     public int toInt() {
         int roFactor;
         int wyFactor;
@@ -94,6 +97,7 @@ public class CubePartPosition {
         return roFactor*wyFactor*gbFactor;
     }
 
+    // convert CubePosition to GLVektor
     public GLVektor toVector() {
         return new GLVektor(this.x(), this.y(), this.z());
     }
