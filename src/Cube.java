@@ -1,3 +1,4 @@
+import GLOOP.GLKugel;
 import GLOOP.GLVektor;
 
 import java.util.Arrays;
@@ -13,17 +14,27 @@ public class Cube {
         for (int ro = ColourPosition.RED; ro <= ColourPosition.ORANGE; ro++) {
             for (int wy = ColourPosition.WHITE; wy <= ColourPosition.YELLOW; wy++) {
                 for (int gb = ColourPosition.GREEN; gb <= ColourPosition.BLUE; gb++) {
-                    cubeParts[i] = new CubePart(new CubePartPosition(ro, wy, gb), (size - 2*spacing)/3, spacing);
+                    cubeParts[i] = new CubePart(new CubePartPosition(ro, wy, gb), (size - 2*spacing)/3, spacing, false);
                     if (ro == 0 && wy == 0 && gb == 0) {
                         //TODO: Cube mid is sphere
-                        cubeParts[i] = new CubePart(new CubePartPosition(ro, wy, gb), 2.1*((size - 2*spacing)/3), spacing);
+                        cubeParts[i] = new CubePart(new CubePartPosition(ro, wy, gb), /*2.1*((size - 2*spacing)/3)*/size*0.5, spacing, true);
+                        cubeParts[i].middle.setzeTextur(Texture.BLACK);
+                    } else {
+                        if (ro < 0) cubeParts[i].cubeSides[0].setzeTextur(Texture.RED);
+                        else cubeParts[i].cubeSides[0].setzeTextur(Texture.BLACK);
+                        if (ro > 0) cubeParts[i].cubeSides[1].setzeTextur(Texture.ORANGE);
+                        else cubeParts[i].cubeSides[1].setzeTextur(Texture.BLACK);
+                        if (wy < 0) cubeParts[i].cubeSides[2].setzeTextur(Texture.WHITE);
+                        else cubeParts[i].cubeSides[2].setzeTextur(Texture.BLACK);
+                        if (wy > 0) cubeParts[i].cubeSides[3].setzeTextur(Texture.YELLOW);
+                        else cubeParts[i].cubeSides[3].setzeTextur(Texture.BLACK);
+                        if (gb < 0) cubeParts[i].cubeSides[4].setzeTextur(Texture.GREEN);
+                        else cubeParts[i].cubeSides[4].setzeTextur(Texture.BLACK);
+                        if (gb > 0) cubeParts[i].cubeSides[5].setzeTextur(Texture.BLUE);
+                        else cubeParts[i].cubeSides[5].setzeTextur(Texture.BLACK);
+
+                        if (ro == ColourPosition.NONE && wy == ColourPosition.WHITE && gb == ColourPosition.NONE) cubeParts[i].cubeSides[2].setzeTextur(Texture.LOGO);
                     }
-                    if (ro < 0) cubeParts[i].cubeSides[0].setzeTextur("textures/red.png");    else cubeParts[i].cubeSides[0].setzeTextur("textures/black.png");
-                    if (ro > 0) cubeParts[i].cubeSides[1].setzeTextur("textures/orange.png");   else cubeParts[i].cubeSides[1].setzeTextur("textures/black.png");
-                    if (wy < 0) cubeParts[i].cubeSides[2].setzeTextur("textures/white.png");      else cubeParts[i].cubeSides[2].setzeTextur("textures/black.png");
-                    if (wy > 0) cubeParts[i].cubeSides[3].setzeTextur("textures/yellow.png");   else cubeParts[i].cubeSides[3].setzeTextur("textures/black.png");
-                    if (gb < 0) cubeParts[i].cubeSides[4].setzeTextur("textures/green.png");    else cubeParts[i].cubeSides[4].setzeTextur("textures/black.png");
-                    if (gb > 0) cubeParts[i].cubeSides[5].setzeTextur("textures/blue.png");     else cubeParts[i].cubeSides[5].setzeTextur("textures/black.png");
                     i++;
                 }
             }
@@ -39,7 +50,6 @@ public class Cube {
 
     public void rotate(Colour colour, int rotationModifier) {
         GLVektor sideCenter = Arrays.stream(cubeParts).filter(cubePart1 -> cubePart1.currentPosition.equals(colour.centerPosition)).collect(Collectors.toList()).get(0).originalVectorPosition;
-        long time1 = System.currentTimeMillis();
         for (int i = 0; i < 90; i++)
             for (CubePart cubePart : Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % colour.colourFactor == 0).collect(Collectors.toList())) {
                 cubePart.rotate(1, new GLVektor(colour.axis.toVector().x * rotationModifier, colour.axis.toVector().y * rotationModifier, colour.axis.toVector().z * rotationModifier), sideCenter);
@@ -49,7 +59,6 @@ public class Cube {
                     throw new RuntimeException(e);
                 }
             }
-        System.out.println(System.currentTimeMillis()-time1);
 
         for (CubePart cubePart : Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % colour.colourFactor == 0).collect(Collectors.toList())) {
             if (colour.colourFactor % ColourFactor.RED == 0) {

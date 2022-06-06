@@ -1,10 +1,8 @@
-import GLOOP.GLQuader;
-import GLOOP.GLVektor;
-import GLOOP.GLWuerfel;
+import GLOOP.*;
 
 public class CubePart {
     public final GLQuader[] cubeSides;
-    private final GLWuerfel middle;
+    public final GLKugel middle;
 
     public final CubePartPosition originalPosition;
     public CubePartPosition currentPosition;
@@ -14,16 +12,23 @@ public class CubePart {
 
     public CubePartPosition[] sidePositions = {CubePartPosition.RED_CENTER, CubePartPosition.ORANGE_CENTER, CubePartPosition.WHITE_CENTER, CubePartPosition.YELLOW_CENTER, CubePartPosition.GREEN_CENTER, CubePartPosition.BLUE_CENTER};
 
-    public CubePart(CubePartPosition cubePosition, double partSize, double spacing) {
-        middle = new GLWuerfel(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), 0);
-
-        cubeSides = new GLQuader[6];
-        cubeSides[0] = new GLQuader(cubePosition.x()*(partSize+spacing)-partSize/2, cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), 0, partSize, partSize);
-        cubeSides[1] = new GLQuader(cubePosition.x()*(partSize+spacing)+partSize/2, cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing), 0, partSize, partSize);
-        cubeSides[2] = new GLQuader(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing)-partSize/2, cubePosition.z()*(partSize+spacing), partSize, 0, partSize);
-        cubeSides[3] = new GLQuader(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing)+partSize/2, cubePosition.z()*(partSize+spacing), partSize, 0, partSize);
-        cubeSides[4] = new GLQuader(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing)-partSize/2, partSize, partSize, 0);
-        cubeSides[5] = new GLQuader(cubePosition.x()*(partSize+spacing), cubePosition.y()*(partSize+spacing), cubePosition.z()*(partSize+spacing)+partSize/2, partSize, partSize, 0);
+    public CubePart(CubePartPosition cubePosition, double partSize, double spacing, boolean ball) {
+        if (!ball) {
+            middle = new GLKugel(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0);
+            cubeSides = new GLQuader[6];
+            cubeSides[0] = new GLQuader(cubePosition.x() * (partSize + spacing) - partSize / 2, cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0, partSize, partSize);
+            cubeSides[1] = new GLQuader(cubePosition.x() * (partSize + spacing) + partSize / 2, cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0, partSize, partSize);
+            cubeSides[2] = new GLQuader(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing) - partSize / 2, cubePosition.z() * (partSize + spacing), partSize, 0, partSize);
+            cubeSides[3] = new GLQuader(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing) + partSize / 2, cubePosition.z() * (partSize + spacing), partSize, 0, partSize);
+            cubeSides[4] = new GLQuader(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing) - partSize / 2, partSize, partSize, 0);
+            cubeSides[5] = new GLQuader(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing) + partSize / 2, partSize, partSize, 0);
+        } else {
+            middle = new GLKugel(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), partSize);
+            cubeSides = new GLQuader[6];
+            for (int i = 0; i < cubeSides.length; i++) {
+                cubeSides[i] = new GLWuerfel(cubePosition.x() * (partSize + spacing), cubePosition.y() * (partSize + spacing), cubePosition.z() * (partSize + spacing), 0);
+            }
+        }
 
 
         this.originalPosition = cubePosition;
