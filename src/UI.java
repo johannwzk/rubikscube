@@ -8,10 +8,6 @@ public class UI {
 
     // window
     private final GLKamera camera;
-    private int rotationModifier = 1;
-    private final GLTafel ui;
-
-
     // light sources
     private final GLLicht light;
     private final GLLicht light2;
@@ -22,15 +18,11 @@ public class UI {
     // UI on the right side
     private final GLTafel ui;
     // shift marker in the top-left corner
-
-
-    private Cube cube;
-    private final GLTafel shiftMarker;
+     private final GLTafel shiftMarker;
 
 // USER INPUT
     // keyboard
     private final GLTastatur keyboard;
-    private GLMaus mouse;
     private boolean shiftLock;
     private int shiftLockTimeout;
     private int[][] positions;
