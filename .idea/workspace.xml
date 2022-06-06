@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Finished documentation (for now)">
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Fixed bug (old cube did not delete itself on reset)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654526290260</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed bug (old cube did not delete itself on reset)">
+      <created>1654533408299</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1654533408299</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,7 +176,8 @@
     <MESSAGE value="Added GLOOP library into project,&#10;added texture constants,&#10;added cube logo,&#10;added window and controls and moved them from Main to UI," />
     <MESSAGE value="Fixed rotation in the wrong direction bug, started adding comments for documentation" />
     <MESSAGE value="Finished documentation (for now)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished documentation (for now)" />
+    <MESSAGE value="Fixed bug (old cube did not delete itself on reset)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug (old cube did not delete itself on reset)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RubiksCube$Main.ic" NAME="Main Coverage Results" MODIFIED="1654526858630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

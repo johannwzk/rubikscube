@@ -120,7 +120,7 @@ public class UI {
         else if (keyboard.esc())System.exit(0);
         else if (keyboard.backspace()) reset();
         else if (keyboard.istGedrueckt('s'))cube.shuffle();
-        else if (keyboard.istGedrueckt('l')) cube.bogosolve();
+        else if (keyboard.istGedrueckt('l')) cube.bogoSolve();
         else if (keyboard.istGedrueckt('h')) cube.solve();
 
         if(mouse.gedruecktLinks()){
@@ -140,7 +140,7 @@ public class UI {
             else if (button == 1)System.exit(0);
             else if (button == 0) reset();
             else if (button == 12)cube.shuffle();
-            else if (button == 14) cube.bogosolve();
+            else if (button == 14) cube.bogoSolve();
             else if (button == 13) cube.solve();
         }
         if(cube.isSolved())victory();

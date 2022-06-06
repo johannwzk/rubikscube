@@ -1,5 +1,4 @@
 import GLOOP.GLVektor;
-import GLOOP.Sys;
 
 import java.util.Arrays;
 import java.util.List;
@@ -125,9 +124,8 @@ public class Cube{
 
     }
 
-    //TODO Bogosolve method
-    public void bogosolve(){
-
+    public void bogoSolve(){
+        while (!isSolved()) shuffle();
     }
 
     //TODO Quicksolve method
