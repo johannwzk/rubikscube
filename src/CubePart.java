@@ -69,4 +69,9 @@ public class CubePart {
         else if (colourFactor % ColourFactor.BLUE == 0) return sidePositions[5];
         else throw new IllegalArgumentException("colourFactor must be a valid colourFactor (2, 3, 5, 7, 11, 13)");
     }
+
+    public void delete() {
+        for (GLQuader cubeSide : cubeSides) cubeSide.loesche();
+        middle.loesche();
+    }
 }

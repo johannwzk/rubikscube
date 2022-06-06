@@ -25,14 +25,14 @@ public class UI {
     private final GLTastatur keyboard;
     private boolean shiftLock;
     private int shiftLockTimeout;
-    private int[][] positions;
+    private final int[][] positions;
     private int[] keys;
     // time shift lock is active after pressing shift -> no update of rotation modifier every cycle
     private int shiftTimeoutPassed;
     // modifies the rotation of cube sides clockwise/counterclockwise (1 = clockwise, -1 = counterclockwise)
     private int rotationModifier = 1;
     // mouse
-    private GLMaus mouse;
+    private final GLMaus mouse;
 
     // cube
     private Cube cube;
@@ -109,6 +109,7 @@ public class UI {
 
         // add passed milliseconds in cycle to shiftTimeoutPassed
         shiftTimeoutPassed += (1000/Main.MAX_CYCLES_PER_SECOND);
+
         // if key with first letter of colour is pressed, rotate the side of the color with rotation modifier, unlock shift
         if (keyboard.istGedrueckt('r')) rotateCube(Colour.RED, rotationModifier);
         else if (keyboard.istGedrueckt('o')) rotateCube(Colour.ORANGE, rotationModifier);
@@ -154,6 +155,7 @@ public class UI {
 
     // reset cube
     public void reset() {
+        cube.delete();
         cube = new Cube(200, 4);
     }
 
