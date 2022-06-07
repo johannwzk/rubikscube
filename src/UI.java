@@ -6,7 +6,7 @@ public class UI {
     public static final double SHIFT_LOCK_TIME = 250; // ms
     public static final double CAMERA_ROTATION_SPEED = 60; // degree/s
     public static final int DEFAULT_SHUFFLE_ROTATIONS = 400;
-    public static final int VICTORY_ANIMATION_LENGTH = 10000; // ms
+    public static final int VICTORY_ANIMATION_LENGTH = 5;
 
     // ENVIRONMENT
 
@@ -73,6 +73,7 @@ public class UI {
 
         // create cube
         cube = new Cube(200, 4);
+        isShuffled = false;
 
         //Positions of buttons. posiotions[x][0] = begin of button on x axis, positions[x][2] = begin of button on y axis; positions[x][3] = end of button on x axis, positions[x][4] = end of button on y axis.
         positions = new int[][]{{1547, 90, 1665, 123}, //Reset
@@ -130,6 +131,7 @@ public class UI {
         }
         else if (keyboard.istGedrueckt('l')) cube.bogoSolve();
         else if (keyboard.istGedrueckt('h')) cube.solve();
+        else if (keyboard.istGedrueckt('n') && keyboard.istGedrueckt('p') && keyboard.istGedrueckt('v')) isShuffled = true; // secret debugging tool
 
         // do action if some button is pressed
         if(mouse.gedruecktLinks()){
@@ -168,6 +170,7 @@ public class UI {
 
     // reset cube
     public void reset() {
+        isShuffled = false;
         cube.delete();
         cube = new Cube(200, 4);
     }
@@ -178,19 +181,41 @@ public class UI {
         return -1;
     }
 
-    // TODO: timer
-    // TODO Victory animation if cube is solved with display how long it took to solve it
+    // victory animation is too complicated. no motivation for documentation
     public void victory(){
         if (!isShuffled) return;
         isShuffled = false;
-        cube.cubeParts[cube.getCubePartIndex(new CubePartPosition(0, 0, 0))].delete();
-        double velocity = 400;
-        for (int i = 0; i < VICTORY_ANIMATION_LENGTH/Main.MAX_CYCLES_PER_SECOND; i++) {
-
-
+        for (int i = 0; i < 5000; i++) {
+            camera.rotiere(15, 0, 1, 0, 0, 0, 0);
+            camera.setzePosition(camera.gibX(), camera.gibY()-3, camera.gibZ());
+            camera.setzeBlickpunkt(camera.gibBlickpunkt().x, camera.gibBlickpunkt().y-1, camera.gibBlickpunkt().z);
+            camera.setzePosition(camera.gibX()*1.003, camera.gibY()*1.003, camera.gibZ()*1.003);
+            i+= 1000/Main.MAX_CYCLES_PER_SECOND;
             try { TimeUnit.MILLISECONDS.sleep(1000/Main.MAX_CYCLES_PER_SECOND); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
+
+        cube.cubeParts[cube.getCubePartIndex(new CubePartPosition(0, 0, 0))].delete();
+        double velocity = 0.15;
+        for (int i = 0; i < VICTORY_ANIMATION_LENGTH*30; i++){
+            for (CubePart cubePart : cube.cubeParts) {
+                for (GLQuader cubeSide : cubePart.cubeSides)
+                    cubeSide.setzePosition(new GLVektor(cubeSide.gibPosition().x*(1+velocity), cubeSide.gibPosition().y*(1+velocity), cubeSide.gibPosition().z*(1+velocity)));
+            }
+            velocity = Math.pow(velocity, 1 + 1d/150/(double)VICTORY_ANIMATION_LENGTH);
+            if (velocity < 0.05) break;
+            try { TimeUnit.MILLISECONDS.sleep(1000/Main.MAX_CYCLES_PER_SECOND); }
+            catch (InterruptedException e) { throw new RuntimeException(e); }
+        }
+
+        for (int i = 0; i < 5000; i++) {
+            camera.rotiere(-15, 0, 1, 0, 0, 0, 0);
+            camera.setzePosition(camera.gibX(), camera.gibY()+3, camera.gibZ());
+            camera.setzeBlickpunkt(camera.gibBlickpunkt().x, camera.gibBlickpunkt().y+1, camera.gibBlickpunkt().z);
+            camera.setzePosition(camera.gibX()/1.003, camera.gibY()/1.003, camera.gibZ()/1.003);
+            i+= 1000/Main.MAX_CYCLES_PER_SECOND;
+        }
+        this.reset();
     }
 
     public void tutorial() {

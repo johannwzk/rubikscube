@@ -10,7 +10,7 @@ public class Cube{
     // length of the rotation animation
     public static final double DEFAULT_ROTATION_ANIMATION_LENGTH = 200000000; //ns
     public static final double SHUFFLE_ROTATION_ANIMATION_START_LENGTH = 500000000; //ns
-    public static final int BOGO_SORT_EFFICIENCY = 69;
+    public static final int BOGO_SORT_EFFICIENCY = 1;
 
     // array of all the small cubes the cube contains
     public final CubePart[] cubeParts = new CubePart[27];
@@ -31,6 +31,7 @@ public class Cube{
                     cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), (size - 2*spacing)/3, spacing, false);
                     // if cubePart is center of the cube, create a Sphere with size of the cube without spacing
                     if (ro == 0 && wy == 0 && gb == 0) {
+                        cubeParts[cubePartsIndex].delete();
                         cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), /*2.1*((size - 2*spacing)/3)*/size*0.5, spacing, true);
                         cubeParts[cubePartsIndex].middle.setzeTextur(Texture.BLACK);
                     } else {
@@ -84,7 +85,7 @@ public class Cube{
         }
 
         // update "logical" positions of the cubes
-        for (CubePart cubePart : Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % colour.colourFactor == 0).collect(Collectors.toList())) {
+        for (CubePart cubePart : toBeRotated) {
             // for each colour, there is a slightly different method of rotating, because one of the three positions always stays the same, the other two are basically a matrix rotation or a multiplication of complex numbers, where rotationModifier is i or -i
             if (colour.colourFactor % ColourFactor.RED == 0) {
                 cubePart.currentPosition = new CubePartPosition(ColourPosition.RED, -rotationModifier * cubePart.currentPosition.z(), rotationModifier * cubePart.currentPosition.y());
