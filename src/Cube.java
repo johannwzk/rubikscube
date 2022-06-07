@@ -141,7 +141,7 @@ public class Cube{
     }
 
     // shuffle cube with random rotations (count is specified with parameter)
-    public void shuffle(int rotations) {
+    public void shuffle(int rotations, boolean speedUp) {
         double rotationSpeed = SHUFFLE_ROTATION_ANIMATION_START_LENGTH;
         for (int i = 0; i < rotations; i++) {
             // generate number 0-1
@@ -150,13 +150,15 @@ public class Cube{
             if (random == 0) random = -1;
             // rotate a random side
             this.rotate(lsdArray[r.nextInt(6)], random, rotationSpeed);
-            // speed up rotation over time
-            rotationSpeed *= 0.95;
+            if (speedUp) {
+                // speed up rotation over time
+                rotationSpeed *= 0.95;
+            }
         }
     }
 
     public void bogoSolve(){
-        while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY);
+        while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY, false);
     }
 
     //TODO Quicksolve method

@@ -1,9 +1,12 @@
 import GLOOP.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class UI {
     public static final double SHIFT_LOCK_TIME = 250; // ms
     public static final double CAMERA_ROTATION_SPEED = 60; // degree/s
     public static final int DEFAULT_SHUFFLE_ROTATIONS = 400;
+    public static final int VICTORY_ANIMATION_LENGTH = 10000; // ms
 
     // ENVIRONMENT
 
@@ -37,6 +40,7 @@ public class UI {
 
     // cube
     private Cube cube;
+    public boolean isShuffled;
 
     public UI(){
         // environment
@@ -91,19 +95,10 @@ public class UI {
 
     public void update() {
         // move camera with up, down, right, left
-        if (keyboard.oben()) {
-            camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-        }
-        if (keyboard.unten()) {
-            camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-        }
-        if (keyboard.rechts()) {
-            camera.rotiere(1, 0, 1, 0, 0, 0, 0);
-        }
-        if (keyboard.links()) {
-//            camera.schwenkeHorizontal(-1);
-            camera.rotiere(1, 0, -1, 0, 0, 0, 0);
-        }
+        if (keyboard.oben()) camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        if (keyboard.unten()) camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        if (keyboard.rechts()) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
+        if (keyboard.links()) camera.rotiere(1, 0, -1, 0, 0, 0, 0);
 
         // if shift is pressed, change rotation modifier for cube rotations, update shift marker, reset shift timeout
         if (keyboard.shift() && !shiftLock) {
@@ -125,11 +120,14 @@ public class UI {
         else if (keyboard.istGedrueckt('o')) rotateCube(Colour.ORANGE, rotationModifier);
         else if (keyboard.istGedrueckt('w')) rotateCube(Colour.WHITE, rotationModifier);
         else if (keyboard.istGedrueckt('y')) rotateCube(Colour.YELLOW, rotationModifier);
-        else if (keyboard.istGedrueckt('g'))rotateCube(Colour.GREEN, rotationModifier);
-        else if (keyboard.istGedrueckt('b'))rotateCube(Colour.BLUE, rotationModifier);
+        else if (keyboard.istGedrueckt('g')) rotateCube(Colour.GREEN, rotationModifier);
+        else if (keyboard.istGedrueckt('b')) rotateCube(Colour.BLUE, rotationModifier);
         else if (keyboard.esc())System.exit(0);
         else if (keyboard.backspace()) reset();
-        else if (keyboard.istGedrueckt('s'))cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS);
+        else if (keyboard.istGedrueckt('s')) {
+            cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS, true);
+            isShuffled = true;
+        }
         else if (keyboard.istGedrueckt('l')) cube.bogoSolve();
         else if (keyboard.istGedrueckt('h')) cube.solve();
 
@@ -139,16 +137,19 @@ public class UI {
             if (button == 8) camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
             else if (button == 10) camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
             else if (button == 11) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
-            else if (button == 9)camera.rotiere(1, 0, -1, 0, 0, 0, 0);
+            else if (button == 9) camera.rotiere(1, 0, -1, 0, 0, 0, 0);
             else if (button == 5) rotateCube(Colour.RED, rotationModifier);
             else if (button == 4) rotateCube(Colour.ORANGE, rotationModifier);
             else if (button == 3) rotateCube(Colour.WHITE, rotationModifier);
             else if (button == 2) rotateCube(Colour.YELLOW, rotationModifier);
-            else if (button == 6)rotateCube(Colour.GREEN, rotationModifier);
-            else if (button == 7)rotateCube(Colour.BLUE, rotationModifier);
-            else if (button == 1)System.exit(0);
+            else if (button == 6) rotateCube(Colour.GREEN, rotationModifier);
+            else if (button == 7) rotateCube(Colour.BLUE, rotationModifier);
+            else if (button == 1) System.exit(0);
             else if (button == 0) reset();
-            else if (button == 12)cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS);
+            else if (button == 12) {
+                cube.shuffle(DEFAULT_SHUFFLE_ROTATIONS, true);
+                isShuffled = true;
+            }
             else if (button == 14) cube.bogoSolve();
             else if (button == 13) cube.solve();
         }
@@ -171,17 +172,26 @@ public class UI {
         cube = new Cube(200, 4);
     }
 
-    //Checks which button is pressed
+    // Checks which button is pressed
     public int buttonPressed(int[][] positions, int x, int y){
         for(int i = 0; i < 15; i++)if(x > positions[i][0] && x < positions[i][2] && y > positions[i][1] && y < positions[i][3]) return i;
         return -1;
     }
-    //TODO Victory amimation if cube is solved with display how long it took to solve it
+
+    // TODO: timer
+    // TODO Victory animation if cube is solved with display how long it took to solve it
     public void victory(){
+        if (!isShuffled) return;
+        isShuffled = false;
+        cube.cubeParts[cube.getCubePartIndex(new CubePartPosition(0, 0, 0))].delete();
+        double velocity = 400;
+        for (int i = 0; i < VICTORY_ANIMATION_LENGTH/Main.MAX_CYCLES_PER_SECOND; i++) {
 
+
+            try { TimeUnit.MILLISECONDS.sleep(1000/Main.MAX_CYCLES_PER_SECOND); }
+            catch (InterruptedException e) { throw new RuntimeException(e); }
+        }
     }
-
-
 
     public void tutorial() {
         // get index of cubePart in cube.cubeParts (new CubePartPosition(x, y, z))
