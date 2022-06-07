@@ -91,10 +91,19 @@ public class UI {
 
     public void update() {
         // move camera with up, down, right, left
-        if (keyboard.oben()) camera.rotiere(1, -1, 0, 0, 0, 0, 0);
-        if (keyboard.unten()) camera.rotiere(1, 1, 0, 0, 0, 0, 0);
-        if (keyboard.rechts()) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
-        if (keyboard.links()) camera.rotiere(1, 0, -1, 0, 0, 0, 0);
+        if (keyboard.oben()) {
+            camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        }
+        if (keyboard.unten()) {
+            camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        }
+        if (keyboard.rechts()) {
+            camera.rotiere(1, 0, 1, 0, 0, 0, 0);
+        }
+        if (keyboard.links()) {
+//            camera.schwenkeHorizontal(-1);
+            camera.rotiere(1, 0, -1, 0, 0, 0, 0);
+        }
 
         // if shift is pressed, change rotation modifier for cube rotations, update shift marker, reset shift timeout
         if (keyboard.shift() && !shiftLock) {
@@ -127,8 +136,8 @@ public class UI {
         // do action if some button is pressed
         if(mouse.gedruecktLinks()){
             int button = buttonPressed(positions, mouse.gibX(), mouse.gibY());
-            if (button == 8) camera.rotiere(1, -1, 0, 0, 0, 0, 0);
-            else if (button == 10) camera.rotiere(1, 1, 0, 0, 0, 0, 0);
+            if (button == 8) camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+            else if (button == 10) camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
             else if (button == 11) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
             else if (button == 9)camera.rotiere(1, 0, -1, 0, 0, 0, 0);
             else if (button == 5) rotateCube(Colour.RED, rotationModifier);
