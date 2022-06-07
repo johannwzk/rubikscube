@@ -171,4 +171,15 @@ public class UI {
     public void victory(){
 
     }
+
+
+
+    public void tutorial() {
+        // get index of cubePart in cube.cubeParts (new CubePartPosition(x, y, z))
+        int index = cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.NONE));
+
+        // get colour orientation of cubePart (specify colour (side))
+        cube.cubeParts[index].getSidePosition(Colour.ORANGE.colourFactor);
+
+    }
 }

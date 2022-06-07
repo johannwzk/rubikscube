@@ -13,7 +13,7 @@ public class Cube{
     public static final int BOGO_SORT_EFFICIENCY = 69;
 
     // array of all the small cubes the cube contains
-    private final CubePart[] cubeParts = new CubePart[27];
+    public final CubePart[] cubeParts = new CubePart[27];
 
     //for rotating a random colour
     private final Random r = new Random();

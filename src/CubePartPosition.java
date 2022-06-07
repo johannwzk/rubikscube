@@ -17,11 +17,11 @@ public class CubePartPosition {
     public static final CubePartPosition GB_AXIS = BLUE_CENTER;
 
 
-    // position on ro (= red/orange) -axis
+    // position on ro (= red/orange) / x -axis
     private int ro;
-    // position on wy (= white/yellow) -axis
+    // position on wy (= white/yellow) / y -axis
     private int wy;
-    // position on gb (= green/blue) -axis
+    // position on gb (= green/blue) / z -axis
     private int gb;
 
     public CubePartPosition(int ro, int wy, int gb) {
