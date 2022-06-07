@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="updated shuffle() method for variable count of rotations (now shuffle(int rotations))">
-      <change afterPath="$PROJECT_DIR$/textures/logo-old.png" afterDir="false" />
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="added: &#10;- custom animation speed to rotate() method&#10;- a some of documentation&#10;- isSolved() method in Cube&#10;- isCenterPosition() method in CubePosition&#10;&#10;changed:&#10;- updated textures&#10;- improved rotate animation again&#10;- shuffle method now speeds the animation up over time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePartPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePartPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/green.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/green.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/orange.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/red.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/red.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/shift.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/shift.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/white.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/white.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/textures/yellow.png" beforeDir="false" afterPath="$PROJECT_DIR$/textures/yellow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654536184333</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added: &#10;- custom animation speed to rotate() method&#10;- a some of documentation&#10;- isSolved() method in Cube&#10;- isCenterPosition() method in CubePosition&#10;&#10;changed:&#10;- updated textures&#10;- improved rotate animation again&#10;- shuffle method now speeds the animation up over time">
+      <created>1654551254141</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1654551254141</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,7 +200,8 @@
     <MESSAGE value="Fixed bug (old cube did not delete itself on reset)" />
     <MESSAGE value="Implemented BogoSolve" />
     <MESSAGE value="updated shuffle() method for variable count of rotations (now shuffle(int rotations))" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated shuffle() method for variable count of rotations (now shuffle(int rotations))" />
+    <MESSAGE value="added: &#10;- custom animation speed to rotate() method&#10;- a some of documentation&#10;- isSolved() method in Cube&#10;- isCenterPosition() method in CubePosition&#10;&#10;changed:&#10;- updated textures&#10;- improved rotate animation again&#10;- shuffle method now speeds the animation up over time" />
+    <option name="LAST_COMMIT_MESSAGE" value="added: &#10;- custom animation speed to rotate() method&#10;- a some of documentation&#10;- isSolved() method in Cube&#10;- isCenterPosition() method in CubePosition&#10;&#10;changed:&#10;- updated textures&#10;- improved rotate animation again&#10;- shuffle method now speeds the animation up over time" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RubiksCube$Main.ic" NAME="Main Coverage Results" MODIFIED="1654526858630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

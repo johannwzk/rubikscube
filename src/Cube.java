@@ -134,9 +134,8 @@ public class Cube{
         for (CubePart cubePart : cubeParts) {
             // if it is a center part, orientation does not matter
             if (cubePart.currentPosition.isCenterPosition()) continue;
-            // gp through every side and check if position is right
-            for (int i = 0; i < cubePart.sidePositions.length; i++)
-                if (!cubePart.sidePositions[i].equals(CubePartPosition.CENTER_POSITIONS[i])) return false;
+            // if cubePart is not in its original position again, return false
+            if (!cubePart.currentPosition.equals(cubePart.originalPosition) || !cubePart.hasOriginalOrientation()) return false;
         }
         return true;
     }

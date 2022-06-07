@@ -70,6 +70,13 @@ public class CubePart {
         else throw new IllegalArgumentException("colourFactor must be a valid colourFactor (2, 3, 5, 7, 11, 13)");
     }
 
+    public boolean hasOriginalOrientation() {
+        // go through every side and check if position is right
+        for (int i = 0; i < this.sidePositions.length; i++)
+            if (!this.sidePositions[i].equals(CubePartPosition.CENTER_POSITIONS[i])) return false;
+        return true;
+    }
+
     public void delete() {
         for (GLQuader cubeSide : cubeSides) cubeSide.loesche();
         middle.loesche();
