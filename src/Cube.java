@@ -1,55 +1,176 @@
 import GLOOP.GLVektor;
+import java.util.Random;
 
 import java.util.Arrays;
-import java.util.Vector;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class Cube {
-    private final CubePart[] cubeParts = new CubePart[27];
+public class Cube{
+    // length of the rotation animation
+    public static final double DEFAULT_ROTATION_ANIMATION_LENGTH = 200000000; //ns
+    public static final double SHUFFLE_ROTATION_ANIMATION_START_LENGTH = 500000000; //ns
+    public static final int BOGO_SORT_EFFICIENCY = 1;
+
+    // array of all the small cubes the cube contains
+    public final CubePart[] cubeParts = new CubePart[27];
+
+    //for rotating a random colour
+    private final Random r = new Random();
+    private final Colour[] lsdArray = {Colour.RED, Colour.ORANGE, Colour.WHITE, Colour.YELLOW, Colour.GREEN, Colour.BLUE};
 
     public Cube(double size, double spacing) {
-        int i = 0;
+        // index to put each cubePart in the cubeParts array despite using 3 for-loops
+        int cubePartsIndex = 0;
 
-        for (int ro = ColorPosition.RED; ro <= ColorPosition.ORANGE; ro++) {
-            for (int wy = ColorPosition.WHITE; wy <= ColorPosition.YELLOW; wy++) {
-                for (int gb = ColorPosition.GREEN; gb <= ColorPosition.BLUE; gb++) {
-                    cubeParts[i] = new CubePart(new CubePosition(ro, wy, gb), (size - 2*spacing)/3, spacing);
+        // cycle through all 3 dimensions of the cube from -1 to 1
+        for (int ro = ColourPosition.RED; ro <= ColourPosition.ORANGE; ro++) {
+            for (int wy = ColourPosition.WHITE; wy <= ColourPosition.YELLOW; wy++) {
+                for (int gb = ColourPosition.GREEN; gb <= ColourPosition.BLUE; gb++) {
+                    // spawn new cube at given position with part size of [cube size minus the two gaps, all divided by three]
+                    cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), (size - 2*spacing)/3, spacing, false);
+                    // if cubePart is center of the cube, create a Sphere with size of the cube without spacing
                     if (ro == 0 && wy == 0 && gb == 0) {
-                        //TODO: Cube mid is sphere
-                        cubeParts[i] = new CubePart(new CubePosition(ro, wy, gb), 2.1*((size - 2*spacing)/3), spacing);
+                        cubeParts[cubePartsIndex].delete();
+                        cubeParts[cubePartsIndex] = new CubePart(new CubePartPosition(ro, wy, gb), /*2.1*((size - 2*spacing)/3)*/size*0.5, spacing, true);
+                        cubeParts[cubePartsIndex].middle.setzeTextur(Texture.BLACK);
+                    } else {
+                        // assign each side a colour based on the position, cube sides inside the cube are black
+                        if (ro < 0) cubeParts[cubePartsIndex].cubeSides[0].setzeTextur(Texture.RED);
+                        else cubeParts[cubePartsIndex].cubeSides[0].setzeTextur(Texture.BLACK);
+                        if (ro > 0) cubeParts[cubePartsIndex].cubeSides[1].setzeTextur(Texture.ORANGE);
+                        else cubeParts[cubePartsIndex].cubeSides[1].setzeTextur(Texture.BLACK);
+                        if (wy < 0) cubeParts[cubePartsIndex].cubeSides[2].setzeTextur(Texture.WHITE);
+                        else cubeParts[cubePartsIndex].cubeSides[2].setzeTextur(Texture.BLACK);
+                        if (wy > 0) cubeParts[cubePartsIndex].cubeSides[3].setzeTextur(Texture.YELLOW);
+                        else cubeParts[cubePartsIndex].cubeSides[3].setzeTextur(Texture.BLACK);
+                        if (gb < 0) cubeParts[cubePartsIndex].cubeSides[4].setzeTextur(Texture.GREEN);
+                        else cubeParts[cubePartsIndex].cubeSides[4].setzeTextur(Texture.BLACK);
+                        if (gb > 0) cubeParts[cubePartsIndex].cubeSides[5].setzeTextur(Texture.BLUE);
+                        else cubeParts[cubePartsIndex].cubeSides[5].setzeTextur(Texture.BLACK);
+
+                        // give the white cube in the center the logo texture
+                        if (ro == ColourPosition.NONE && wy == ColourPosition.WHITE && gb == ColourPosition.NONE) cubeParts[cubePartsIndex].cubeSides[2].setzeTextur(Texture.LOGO);
                     }
-                    if (ro < 0) cubeParts[i].cubeSides[0].setzeTextur("textures/red.png");    else cubeParts[i].cubeSides[0].setzeTextur("textures/black.png");
-                    if (ro > 0) cubeParts[i].cubeSides[1].setzeTextur("textures/orange.png");   else cubeParts[i].cubeSides[1].setzeTextur("textures/black.png");
-                    if (wy < 0) cubeParts[i].cubeSides[2].setzeTextur("textures/white.png");      else cubeParts[i].cubeSides[2].setzeTextur("textures/black.png");
-                    if (wy > 0) cubeParts[i].cubeSides[3].setzeTextur("textures/yellow.png");   else cubeParts[i].cubeSides[3].setzeTextur("textures/black.png");
-                    if (gb < 0) cubeParts[i].cubeSides[4].setzeTextur("textures/green.png");    else cubeParts[i].cubeSides[4].setzeTextur("textures/black.png");
-                    if (gb > 0) cubeParts[i].cubeSides[5].setzeTextur("textures/blue.png");     else cubeParts[i].cubeSides[5].setzeTextur("textures/black.png");
-                    i++;
+
+                    cubePartsIndex++;
                 }
             }
         }
     }
 
-    //TODO: add part rotation
-    public void rotate(Color color, int rotationModifier) {
-        for (int i = 0; i < 90; i++)
-            for (CubePart cubePart : Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % color.colorFactor == 0).collect(Collectors.toList())) {
-                cubePart.rotate(1, new GLVektor(color.axis.toVector().x * rotationModifier, color.axis.toVector().y * rotationModifier, color.axis.toVector().z * rotationModifier), Arrays.stream(cubeParts).filter(cubePart1 -> cubePart1.currentPosition.equals(color.centerPosition)).collect(Collectors.toList()).get(0).originalVectorPosition);
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+    // get index of cube in cubeParts[] based on position, if it does not exist, return -1
+    public int getCubePartIndex(CubePartPosition cubePartPosition) {
+        for (int i = 0; i < cubeParts.length; i++) {
+            if (cubeParts[i].currentPosition.equals(cubePartPosition)) return i;
+        }
+        return -1;
+    }
 
-        for (CubePart cubePart : Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % color.colorFactor == 0).collect(Collectors.toList())) {
-            if (color.colorFactor % ColorFactor.RED == 0) cubePart.currentPosition = new CubePosition(ColorPosition.RED, -rotationModifier * cubePart.currentPosition.z(), rotationModifier * cubePart.currentPosition.y());
-            if (color.colorFactor % ColorFactor.ORANGE == 0) cubePart.currentPosition = new CubePosition(ColorPosition.ORANGE, -rotationModifier * cubePart.currentPosition.z(), rotationModifier * cubePart.currentPosition.y());
-            if (color.colorFactor % ColorFactor.WHITE == 0) cubePart.currentPosition = new CubePosition(rotationModifier * cubePart.currentPosition.z(), ColorPosition.WHITE, -rotationModifier * cubePart.currentPosition.x());
-            if (color.colorFactor % ColorFactor.YELLOW == 0) cubePart.currentPosition = new CubePosition(rotationModifier * cubePart.currentPosition.z(), ColorPosition.YELLOW, -rotationModifier * cubePart.currentPosition.x());
-            if (color.colorFactor % ColorFactor.GREEN == 0) cubePart.currentPosition = new CubePosition(-rotationModifier * cubePart.currentPosition.y(), rotationModifier * cubePart.currentPosition.x(), ColorPosition.GREEN);
-            if (color.colorFactor % ColorFactor.BLUE == 0) cubePart.currentPosition = new CubePosition(-rotationModifier * cubePart.currentPosition.y(), rotationModifier * cubePart.currentPosition.x(), ColorPosition.BLUE);
+    //rotate colour side with direction modifier and specific rotation animation speed in ms
+    public void rotate(Colour colour, int rotationModifier, double animationSpeed) {
+        if (rotationModifier == 0) throw new IllegalArgumentException("rotationModifier must not be 0");
+        // get center position of the side to rotate around it
+        GLVektor sideCenter = Arrays.stream(cubeParts).filter(cubePart1 -> cubePart1.currentPosition.equals(colour.centerPosition)).collect(Collectors.toList()).get(0).originalVectorPosition;
+
+        List<CubePart> toBeRotated = Arrays.stream(cubeParts).filter(cubePart -> cubePart.currentPosition.toInt() % colour.colourFactor == 0).collect(Collectors.toList());
+        // animate side rotation, 1 degree 90 times
+        for (int i = 0; i < 90; i++) {
+            // rotate each small cube around the center by 1 degree, direction modified by rotationModifier
+            for (CubePart cubePart : toBeRotated)
+                cubePart.rotate(1, new GLVektor(-colour.centerPosition.toVector().x * rotationModifier, -colour.centerPosition.toVector().y * rotationModifier, -colour.centerPosition.toVector().z * rotationModifier), sideCenter);
+            // wait ROTATION_ANIMATION_LENGTH/90 90 times -> animation length ~= ROTATION_ANIMATION_LENGTH
+            try { TimeUnit.NANOSECONDS.sleep((long)(animationSpeed/90)); }
+            catch (InterruptedException e) { throw new RuntimeException(e); }
+        }
+
+        // update "logical" positions of the cubes
+        for (CubePart cubePart : toBeRotated) {
+            // for each colour, there is a slightly different method of rotating, because one of the three positions always stays the same, the other two are basically a matrix rotation or a multiplication of complex numbers, where rotationModifier is i or -i
+            if (colour.colourFactor % ColourFactor.RED == 0) {
+                cubePart.currentPosition = new CubePartPosition(ColourPosition.RED, -rotationModifier * cubePart.currentPosition.z(), rotationModifier * cubePart.currentPosition.y());
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(cubePart.sidePositions[i].x(), -rotationModifier * cubePart.sidePositions[i].z(), rotationModifier * cubePart.sidePositions[i].y());
+            }
+            else if (colour.colourFactor % ColourFactor.ORANGE == 0) {
+                cubePart.currentPosition = new CubePartPosition(ColourPosition.ORANGE, rotationModifier * cubePart.currentPosition.z(), -rotationModifier * cubePart.currentPosition.y());
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(cubePart.sidePositions[i].x(), rotationModifier*cubePart.sidePositions[i].z(), -rotationModifier * cubePart.sidePositions[i].y());
+            }
+            else if (colour.colourFactor % ColourFactor.WHITE == 0) {
+                cubePart.currentPosition = new CubePartPosition(rotationModifier * cubePart.currentPosition.z(), ColourPosition.WHITE, -rotationModifier * cubePart.currentPosition.x());
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(rotationModifier * cubePart.sidePositions[i].z(), cubePart.sidePositions[i].y(), -rotationModifier * cubePart.sidePositions[i].x());
+            }
+            else if (colour.colourFactor % ColourFactor.YELLOW == 0) {
+                cubePart.currentPosition = new CubePartPosition(-rotationModifier * cubePart.currentPosition.z(), ColourPosition.YELLOW, rotationModifier * cubePart.currentPosition.x());
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(-rotationModifier * cubePart.sidePositions[i].z(), cubePart.sidePositions[i].y(), rotationModifier * cubePart.sidePositions[i].x());
+            }
+            else if (colour.colourFactor % ColourFactor.GREEN == 0) {
+                cubePart.currentPosition = new CubePartPosition(-rotationModifier * cubePart.currentPosition.y(), rotationModifier * cubePart.currentPosition.x(), ColourPosition.GREEN);
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(-rotationModifier * cubePart.sidePositions[i].y(), rotationModifier * cubePart.sidePositions[i].x(), cubePart.sidePositions[i].z());
+            }
+            else if (colour.colourFactor % ColourFactor.BLUE == 0) {
+                cubePart.currentPosition = new CubePartPosition(rotationModifier * cubePart.currentPosition.y(), -rotationModifier * cubePart.currentPosition.x(), ColourPosition.BLUE);
+                for (int i = 0; i < cubePart.sidePositions.length; i++)
+                    cubePart.sidePositions[i] = new CubePartPosition(rotationModifier * cubePart.sidePositions[i].y(), -rotationModifier * cubePart.sidePositions[i].x(), cubePart.sidePositions[i].z());
+            }
+        }
+    }
+
+    // rotation with default animation speed
+    public void rotate(Colour colour, int rotationModifier) {
+        this.rotate(colour, rotationModifier, DEFAULT_ROTATION_ANIMATION_LENGTH);
+    }
+
+    // get the side position of a colour on a small cube in cubeParts
+    public CubePartPosition getSidePosition(CubePartPosition cubePartPosition, Colour colour) {
+        return cubeParts[getCubePartIndex(cubePartPosition)].getSidePosition(colour.colourFactor);
+    }
+    // Method that checks if cube is solved
+    public boolean isSolved(){
+        // go through every cube Part
+        for (CubePart cubePart : cubeParts) {
+            // if it is a center part, orientation does not matter
+            if (cubePart.currentPosition.isCenterPosition()) continue;
+            // if cubePart is not in its original position again, return false
+            if (!cubePart.currentPosition.equals(cubePart.originalPosition) || !cubePart.hasOriginalOrientation()) return false;
+        }
+        return true;
+    }
+
+    // shuffle cube with random rotations (count is specified with parameter)
+    public void shuffle(int rotations, boolean speedUp) {
+        double rotationSpeed = SHUFFLE_ROTATION_ANIMATION_START_LENGTH;
+        for (int i = 0; i < rotations; i++) {
+            // generate number 0-1
+            int random = r.nextInt(2);
+            // rotation modifier has to be 1 or -1, so if random == 0, set it to -2
+            if (random == 0) random = -1;
+            // rotate a random side
+            this.rotate(lsdArray[r.nextInt(6)], random, rotationSpeed);
+            if (speedUp) {
+                // speed up rotation over time
+                rotationSpeed *= 0.95;
+            }
+        }
+    }
+
+    public void bogoSolve(){
+        while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY, false);
+    }
+
+    //TODO QuickSolve method
+
+    public void solve(){
+
+    }
+
+    public void delete() {
+        for (CubePart cubePart : cubeParts) {
+            cubePart.delete();
         }
     }
 }

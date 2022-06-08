@@ -1,31 +1,16 @@
-import GLOOP.GLKamera;
-import GLOOP.GLLicht;
-
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) {
-        GLKamera camera = new GLKamera(1920, 1080); camera.setzePosition(0, 200, -500);
-        GLLicht light = new GLLicht(10000, 10000, 10000);
-        GLLicht light2 = new GLLicht(-10000, -10000, -10000);
-        Cube cube = new Cube(200, 4);
+    // Maximum and also (i no rotating event is happening) approximately the number of "ticks" per second
+    public static final int MAX_CYCLES_PER_SECOND = 60; // 1/s
+    public static final UI ui = new UI();
 
-        int i = 0;
+    public static void main(String[] args) {
+
+
         while (true){
-            ++i;
-            camera.rotiere(0.3, 0, 1, 0, 0, 0, 0);
-            light.rotiere(0.3, 0, 1, 0, 0 , 0, 0);
-            light2.rotiere(0.3, 0, 1, 0, 0 , 0, 0);
-            if (i % 370 == 0) {
-                if (i == 1) return;
-                cube.rotate(Color.RED, 1);
-                cube.rotate(Color.ORANGE, 1);
-                cube.rotate(Color.WHITE, 1);
-                cube.rotate(Color.YELLOW, 1);
-                cube.rotate(Color.GREEN, 1);
-                cube.rotate(Color.BLUE, 1);
-            }
-            try { TimeUnit.MILLISECONDS.sleep(16); }
+            ui.update();
+            try { TimeUnit.MILLISECONDS.sleep(1000/ MAX_CYCLES_PER_SECOND); }
             catch (InterruptedException e) { throw new RuntimeException(e); }
         }
     }

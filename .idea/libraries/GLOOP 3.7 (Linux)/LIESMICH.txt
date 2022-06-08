@@ -1,0 +1,36 @@
+﻿Aenderungen ab GLOOP Version 3.7:
+
+
+
+- GLBoden und GLHimmel sind keine Unterklassen von GLObjekt mehr.
+
+
+- Methodenbezeichner in der Klasse GLVektor wurden angepasst.
+
+
+- Sichtbarkeit von Methoden in GLKamera wurde korrigiert.
+
+
+- Installation für MacOS wurde vereinfacht.
+
+
+- Speicherleck beim Loeschen von GLObjekten wurde beseitig.
+
+
+- kleinere Fehlerbeseitigungen
+
+
+- allgemeine Performanceverbesserung
+
+
+
+
+Aenderungen ab GLOOP Version 3.5:
+
+- Methoden dreheDich und loescheDich der Klasse GLObjekt wurden in "drehe" bzw. "loesche" umbenannt.
+- Methodenbezeichner beginnen nun alle mit einem kleinen Buchstaben. 
+
+- Installation des Systems hat sich vereinfacht. 
+- Klasse GLTafel verwendet eine neue Zeichensatztextur ("Zeichen.png").
+ 
+ 

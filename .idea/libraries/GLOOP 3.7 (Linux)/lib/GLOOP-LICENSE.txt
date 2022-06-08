@@ -1,0 +1,29 @@
+GLOOP (Graphics Library for Object Oriented Programming) 
+=========================================================
+
+Version
+---------------------------
+3.7, Februar 2014
+
+
+Lizenz
+---------------------------
+Die Bibliothek GLOOP wird den mit Schule und Ausbildung befassten Institutionen und den darin Tätigen in NRW, also Lehrkräften, Referendarinnen und Referendaren, Lehramtsstudierenden, in der Lehrerausbildung Tätigen (z.B. Lehrende an Universitäten) sowie Schülerinnen und Schülern des Landes NRW zur Nutzung kostenlos zur Verfügung gestellt.
+Eine kommerzielle Nutzung ist grundsätzlich ausgeschlossen. Abweichende Vereinbarungen bedürfen der Schriftform.
+
+
+Haftungsauschluss
+---------------------------
+Für Schäden an Soft- oder Hardware oder Vermögensschäden, die durch das Benutzen des Programms entstehen, wird nicht gehaftet, es sei denn diese beruhen nachgewiesenermaßen auf einem grob fahrlässigen oder vorsätzlichen Handeln.
+ 
+
+Autor und Ansprechpartner der GLOOP-Bibliothek
+---------------------------
+Volker Quade
+E-Mail: gloop(at)qua-lis.nrw.de
+
+
+
+Webseite
+---------------------------
+www.schulentwicklung.nrw.de/cms/gloop/
