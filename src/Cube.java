@@ -162,7 +162,7 @@ public class Cube{
         while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY, false);
     }
 
-    //TODO Quicksolve method
+    //TODO QuickSolve method
 
     public void solve(){
 

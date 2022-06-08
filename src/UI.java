@@ -75,7 +75,7 @@ public class UI {
         cube = new Cube(200, 4);
         isShuffled = false;
 
-        //Positions of buttons. posiotions[x][0] = begin of button on x axis, positions[x][2] = begin of button on y axis; positions[x][3] = end of button on x axis, positions[x][4] = end of button on y axis.
+        //Positions of buttons. positions[x][0] = begin of button on x axis, positions[x][2] = begin of button on y axis; positions[x][3] = end of button on x axis, positions[x][4] = end of button on y-axis.
         positions = new int[][]{{1547, 90, 1665, 123}, //Reset
                 {1752, 89, 1851, 123}, //Quit
                 {1554, 217, 1646, 309}, //Y
@@ -89,17 +89,17 @@ public class UI {
                 {1672, 638, 1763, 726}, //DOWN
                 {1786, 638, 1880, 726}, //RIGHT
                 {1555, 763, 1878, 824}, //Shuffle
-                {1553, 847, 1882, 914}, //Quicksolve
-                {1555, 932, 1880, 995} //Bogosolve
+                {1553, 847, 1882, 914}, //QuickSolve
+                {1555, 932, 1880, 995} //BogoSolve
         };
     }
 
     public void update() {
         // move camera with up, down, right, left
-        if (keyboard.oben()) camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-        if (keyboard.unten()) camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-        if (keyboard.rechts()) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
-        if (keyboard.links()) camera.rotiere(1, 0, -1, 0, 0, 0, 0);
+        if (keyboard.oben()) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        if (keyboard.unten()) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+        if (keyboard.rechts()) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, 0, 1, 0, 0, 0, 0);
+        if (keyboard.links()) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, 0, -1, 0, 0, 0, 0);
 
         // if shift is pressed, change rotation modifier for cube rotations, update shift marker, reset shift timeout
         if (keyboard.shift() && !shiftLock) {
@@ -136,10 +136,10 @@ public class UI {
         // do action if some button is pressed
         if(mouse.gedruecktLinks()){
             int button = buttonPressed(positions, mouse.gibX(), mouse.gibY());
-            if (button == 8) camera.rotiere(1, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-            else if (button == 10) camera.rotiere(1, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
-            else if (button == 11) camera.rotiere(1, 0, 1, 0, 0, 0, 0);
-            else if (button == 9) camera.rotiere(1, 0, -1, 0, 0, 0, 0);
+            if (button == 8) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, new GLVektor(camera.gibBlickrichtung().z, 0, -camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+            else if (button == 10) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, new GLVektor(-camera.gibBlickrichtung().z, 0, camera.gibBlickrichtung().x), new GLVektor(0, 0, 0));
+            else if (button == 11) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, 0, 1, 0, 0, 0, 0);
+            else if (button == 9) camera.rotiere(CAMERA_ROTATION_SPEED/Main.MAX_CYCLES_PER_SECOND, 0, -1, 0, 0, 0, 0);
             else if (button == 5) rotateCube(Colour.RED, rotationModifier);
             else if (button == 4) rotateCube(Colour.ORANGE, rotationModifier);
             else if (button == 3) rotateCube(Colour.WHITE, rotationModifier);

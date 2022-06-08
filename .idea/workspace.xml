@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="added speedUp parameter to shuffle() method, started victoryAnimation">
+    <list default="true" id="9264c930-049a-457a-8dd8-a3ca49a73d51" name="Changes" comment="Added victory animation,&#10;Added keyboard shortcut for victory animation,&#10;Changed BogoSortEfficiency,&#10;Fixed victory animation bug in reset,&#10;made Cube.rotate() method more efficient">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CubePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CubePartPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CubePartPosition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
     </list>
@@ -202,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654606588543</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added victory animation,&#10;Added keyboard shortcut for victory animation,&#10;Changed BogoSortEfficiency,&#10;Fixed victory animation bug in reset,&#10;made Cube.rotate() method more efficient">
+      <created>1654630382076</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654630382076</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,7 +242,8 @@
     <MESSAGE value="wrote tutorial, few little changes" />
     <MESSAGE value="improved camera" />
     <MESSAGE value="added speedUp parameter to shuffle() method, started victoryAnimation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added speedUp parameter to shuffle() method, started victoryAnimation" />
+    <MESSAGE value="Added victory animation,&#10;Added keyboard shortcut for victory animation,&#10;Changed BogoSortEfficiency,&#10;Fixed victory animation bug in reset,&#10;made Cube.rotate() method more efficient" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added victory animation,&#10;Added keyboard shortcut for victory animation,&#10;Changed BogoSortEfficiency,&#10;Fixed victory animation bug in reset,&#10;made Cube.rotate() method more efficient" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RubiksCube$Main.ic" NAME="Main Coverage Results" MODIFIED="1654608480517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
