@@ -18,4 +18,14 @@ public final class Colour {
         this.colourFactor = colourFactor;
         this.centerPosition = centerPosition;
     }
+
+    public static Colour getColourFromFactor(int colourFactor) {
+        if (colourFactor == ColourFactor.RED) return Colour.RED;
+        if (colourFactor == ColourFactor.ORANGE) return Colour.ORANGE;
+        if (colourFactor == ColourFactor.WHITE) return Colour.WHITE;
+        if (colourFactor == ColourFactor.YELLOW) return Colour.YELLOW;
+        if (colourFactor == ColourFactor.GREEN) return Colour.GREEN;
+        if (colourFactor == ColourFactor.BLUE) return Colour.BLUE;
+        else throw new IllegalArgumentException("colourFactor must be specific (either 2, 3, 5, 7, 11 or 13)");
+    }
 }

@@ -81,4 +81,20 @@ public class CubePartPosition {
         return zeroes >= 2;
     }
 
+    public boolean isEdgePosition() {
+        int zeroes = 0;
+        if (this.ro == 0) zeroes++;
+        if (this.wy == 0) zeroes++;
+        if (this.gb == 0) zeroes++;
+        return zeroes == 1;
+    }
+
+    public boolean isCornerPosition() {
+        int zeroes = 0;
+        if (this.ro == 0) zeroes++;
+        if (this.wy == 0) zeroes++;
+        if (this.gb == 0) zeroes++;
+        return zeroes == 0;
+    }
+
 }

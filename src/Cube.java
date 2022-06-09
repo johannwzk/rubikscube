@@ -1,3 +1,4 @@
+import GLOOP.GLTastatur;
 import GLOOP.GLVektor;
 import java.util.Random;
 
@@ -7,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Cube{
+    GLTastatur debugkeyboard = new GLTastatur();
+
     // length of the rotation animation
     public static final double DEFAULT_ROTATION_ANIMATION_LENGTH = 200000000; //ns
     public static final double SHUFFLE_ROTATION_ANIMATION_START_LENGTH = 500000000; //ns
@@ -162,15 +165,69 @@ public class Cube{
         while (!isSolved()) shuffle(BOGO_SORT_EFFICIENCY, false);
     }
 
-    //TODO QuickSolve method
-
-    public void solve(){
-
-    }
-
     public void delete() {
         for (CubePart cubePart : cubeParts) {
             cubePart.delete();
         }
+    }
+
+    //TODO QuickSolve method
+    public void solve(){
+        if (this.isSolved()) return;
+        System.out.println("HI");
+        whiteCross();
+    }
+
+    private void whiteCross() {
+        // find white edge pieces
+        int[] whiteEdgePieceIndices = new int[4];
+        int whiteEdgePieceIndicesIndex = 0;
+        for (int i = 0; i < cubeParts.length; i++) {
+            CubePartPosition sidePosition = cubeParts[i].getSidePosition(Colour.WHITE.colourFactor);
+            if (sidePosition != null && cubeParts[i].currentPosition.isEdgePosition()) {
+                whiteEdgePieceIndices[whiteEdgePieceIndicesIndex] = i;
+                whiteEdgePieceIndicesIndex++;
+            }
+        }
+
+        boolean[] whiteEdgePieceAtYellow = new boolean [4];
+        for (int i = 0; i < 4; i++) {
+            whiteEdgePieceAtYellow[i] = cubeParts[whiteEdgePieceIndices[i]].getSidePosition(Colour.WHITE.colourFactor).equals(CubePartPosition.YELLOW_CENTER);
+        }
+
+        while (!(whiteEdgePieceAtYellow[0] && whiteEdgePieceAtYellow[1] && whiteEdgePieceAtYellow[2] && whiteEdgePieceAtYellow[3]) && !debugkeyboard.backspace()) {
+            for (int i = 0; i < 4; i++) {
+                if (whiteEdgePieceAtYellow[i]) continue;
+
+                int finalI = i;
+                // if at white
+                if (cubeParts[whiteEdgePieceIndices[i]].getSidePosition(Colour.WHITE.colourFactor).equals(CubePartPosition.WHITE_CENTER)) {
+                    while (Arrays.stream(whiteEdgePieceIndices).anyMatch(n -> n == getCubePartIndex(new CubePartPosition(cubeParts[whiteEdgePieceIndices[finalI]].currentPosition.x(), ColourPosition.YELLOW, cubeParts[whiteEdgePieceIndices[finalI]].currentPosition.z())))) {
+                        this.rotate(Colour.YELLOW, 1);
+                    }
+                    
+                    int whiteEdgePieceAtYellowPositionsToInt = 1;
+                    while (CustomMath.gcd(cubeParts[whiteEdgePieceIndices[i]].currentPosition.toInt(),whiteEdgePieceAtYellowPositionsToInt) > 1) {
+                        whiteEdgePieceAtYellowPositionsToInt = 1;
+                        for (int j = 0; j < 4; j++) {
+                            if (whiteEdgePieceAtYellow[j])
+                                whiteEdgePieceAtYellowPositionsToInt *= cubeParts[whiteEdgePieceIndices[i]].currentPosition.toInt();
+                        }
+                    }
+                    int colour = cubeParts[whiteEdgePieceIndices[i]].currentPosition.toInt() / Colour.WHITE.colourFactor;
+                    this.rotate(Colour.getColourFromFactor(colour), 1);
+                    this.rotate(Colour.getColourFromFactor(colour), 1);
+                }
+                // if elsewhere  TODO: Work on this. Help
+                else {
+//                    while (Arrays.stream(whiteEdgePieceIndices).anyMatch(n -> getCubePartIndex(new CubePartPosition(cubeParts[whiteEdgePieceIndices[finalI]].getSidePosition(ColourFactor.WHITE).z()))))
+                }
+            }
+
+            for (int i = 0; i < 4; i++) {
+                whiteEdgePieceAtYellow[i] = cubeParts[whiteEdgePieceIndices[i]].getSidePosition(Colour.WHITE.colourFactor).equals(CubePartPosition.YELLOW_CENTER);
+            }
+        }
+
     }
 }

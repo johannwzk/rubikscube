@@ -61,14 +61,28 @@ public class CubePart {
 
     // get position of colour side on a small cube, also used for solving algorithm
     public CubePartPosition getSidePosition(int colourFactor) {
-        if (colourFactor % ColourFactor.RED == 0) return sidePositions[0];
-        else if (colourFactor % ColourFactor.ORANGE == 0) return sidePositions[1];
-        else if (colourFactor % ColourFactor.WHITE == 0) return sidePositions[2];
-        else if (colourFactor % ColourFactor.YELLOW == 0) return sidePositions[3];
-        else if (colourFactor % ColourFactor.GREEN == 0) return sidePositions[4];
-        else if (colourFactor % ColourFactor.BLUE == 0) return sidePositions[5];
+        if (colourFactor % ColourFactor.RED == 0)
+            if (sideIsVisible(sidePositions[0])) return sidePositions[0]; else return null;
+        else if (colourFactor % ColourFactor.ORANGE == 0)
+            if (sideIsVisible(sidePositions[1])) return sidePositions[1]; else return null;
+        else if (colourFactor % ColourFactor.WHITE == 0)
+            if (sideIsVisible(sidePositions[2])) return sidePositions[2]; else return null;
+        else if (colourFactor % ColourFactor.YELLOW == 0)
+            if (sideIsVisible(sidePositions[3])) return sidePositions[3]; else return null;
+        else if (colourFactor % ColourFactor.GREEN == 0)
+            if (sideIsVisible(sidePositions[4])) return sidePositions[4]; else return null;
+        else if (colourFactor % ColourFactor.BLUE == 0)
+            if (sideIsVisible(sidePositions[5])) return sidePositions[5]; else return null;
         else throw new IllegalArgumentException("colourFactor must be a valid colourFactor (2, 3, 5, 7, 11, 13)");
     }
+
+    public boolean sideIsVisible(int colourFactor) {
+        return sideIsVisible(getSidePosition(colourFactor));
+    }
+
+    private boolean sideIsVisible(CubePartPosition sidePosition) {
+        return CustomMath.gcd(sidePosition.toInt(), this.currentPosition.toInt()) > 1;
+     }
 
     public boolean hasOriginalOrientation() {
         // go through every side and check if position is right

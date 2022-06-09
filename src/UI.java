@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class UI {
     public static final double SHIFT_LOCK_TIME = 250; // ms
     public static final double CAMERA_ROTATION_SPEED = 60; // degree/s
-    public static final int DEFAULT_SHUFFLE_ROTATIONS = 400;
+    public static final int DEFAULT_SHUFFLE_ROTATIONS = 100;
     public static final int VICTORY_ANIMATION_LENGTH = 5;
 
     // ENVIRONMENT
@@ -219,11 +219,10 @@ public class UI {
     }
 
     public void tutorial() {
-        // get index of cubePart in cube.cubeParts (new CubePartPosition(x, y, z))
-        int index = cube.getCubePartIndex(new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.NONE));
+        CubePartPosition position = new CubePartPosition(ColourPosition.RED, ColourPosition.WHITE, ColourPosition.NONE);
 
         // get colour orientation of cubePart (specify colour (side))
-        cube.cubeParts[index].getSidePosition(Colour.ORANGE.colourFactor);
+        cube.getSidePosition(position, Colour.BLUE);
 
     }
 }
